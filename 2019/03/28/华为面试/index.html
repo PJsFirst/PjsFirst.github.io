@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="华为3道笔试题，2个小时，共600分，做出了2道，有点虚。第一题是送分题，最后一道没有思路，有想法后再更新。">
+<meta name="keywords" content="面试题,华为,C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2019-3-27华为实习春招笔试">
+<meta property="og:url" content="http://yoursite.com/2019/03/28/华为面试/index.html">
+<meta property="og:site_name" content="PJONE">
+<meta property="og:description" content="华为3道笔试题，2个小时，共600分，做出了2道，有点虚。第一题是送分题，最后一道没有思路，有想法后再更新。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-03-28T12:20:42.315Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2019-3-27华为实习春招笔试">
+<meta name="twitter:description" content="华为3道笔试题，2个小时，共600分，做出了2道，有点虚。第一题是送分题，最后一道没有思路，有想法后再更新。">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/28/华为面试/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>2019-3-27华为实习春招笔试 | PJONE</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PJONE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/28/华为面试/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="PJONE">
+      <meta itemprop="description" content="PJONE的博客">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PJONE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2019-3-27华为实习春招笔试
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-28 18:40:12 / 修改时间：20:20:42" itemprop="dateCreated datePublished" datetime="2019-03-28T18:40:12+08:00">2019-03-28</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/algorithmn/" itemprop="url" rel="index"><span itemprop="name">algorithmn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+            <div class="post-description">华为3道笔试题，2个小时，共600分，做出了2道，有点虚。第一题是送分题，最后一道没有思路，有想法后再更新。</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h1><p>关于大小端的问题，一串字符串长9个字符，第一个字符为‘0’则代表是小端，第一个字符为‘1’则代表是大端，给你一个数字表示字符串的个数，和一行字符串（全部字符串连接在一起了），输出对应数据的大端表示，每串字符串之间有一个空格。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">2</span><br><span class="line">&quot;012345678112345678&quot;</span><br><span class="line">输出：</span><br><span class="line">&quot;87654321 12345678&quot;</span><br></pre></td></tr></table></figure>
+<p>这题是比较简单，其实大端小端我都记得不太清楚，虽然经常接触。但在这里只要简单地实现为当第一个字符为’0’时，将字符串倒序输出，当第一个字符为’1’时，将字符串输出。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">string</span> s;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; s;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> pos = <span class="number">9</span> * i;</span><br><span class="line">        <span class="keyword">if</span>(s[pos] == <span class="string">'0'</span>)&#123;</span><br><span class="line">            <span class="comment">//小端</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">8</span>; j &gt; <span class="number">0</span>; j--)&#123;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; s[pos + j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">//大端</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; <span class="number">9</span>; j++)&#123;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; s[pos + j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="第二题"><a href="#第二题" class="headerlink" title="第二题"></a>第二题</h1><p>关于旅行商问题的，给你5个坐标，表示5个地方的位置，从（0，0）出发，计算访问5个顶点然后回到原点的最短距离。输入的点是不会重复的。</p>
+<p>时间限制：3s</p>
+<h2 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">300 200 300 100 300 400 300 300 300 0</span><br><span class="line">输出：</span><br><span class="line">1200</span><br><span class="line">解释：先去点5，再去点2，再去点1，再去点5，再去点3，再回到原点</span><br></pre></td></tr></table></figure>
+<p>这题是想得比较久的，这在之前的算法课是相似的，只不过不是5个坐标，而是N个坐标。如果是N个坐标，这就是著名的旅行商的问题。这个是NP难问题。我的天，不会想让我用模拟退火法或者遗传算法之类的人工智能算法吧！  </p>
+<p>只给我3s，我不知道能不能用模拟退火法跑出结果。之前在比较大的数据集里写过这个算法，我不确定能不能得到准确的结果。因此在笔试中，试图用其他方法来解。</p>
+<p>最终还是选择用暴力破解。总共才5 <em> 4 </em> 3 <em> 2 </em> 1 = 120种方法，只要全部遍历，记录最短的，返回就好了。</p>
+<p>注意的是，还要加上原点，而且用一个2 * 2的数组来记录距离。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; v;</span><br><span class="line">    v.push_back(make_pair(<span class="number">0</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> x, y;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; x &gt;&gt; y;</span><br><span class="line">        v.push_back(make_pair(x, y));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">double</span> distance[<span class="number">6</span>][<span class="number">6</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">6</span>; j++)&#123;</span><br><span class="line">            <span class="keyword">int</span> x = v[i].first - v[j].first;</span><br><span class="line">            <span class="keyword">int</span> y = v[i].second - v[j].second;</span><br><span class="line">            distance[i][j] = <span class="built_in">sqrt</span>(x * x + y * y);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">double</span> res = <span class="number">9999</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> x0 = <span class="number">1</span>; x0 &lt; <span class="number">6</span>; x0++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> x1 = <span class="number">1</span>; x1 &lt; <span class="number">6</span>; x1++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(x1 == x0) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> x2 = <span class="number">1</span>; x2 &lt; <span class="number">6</span>; x2++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(x2 == x1 || x2 == x0) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> x3 = <span class="number">1</span>; x3 &lt; <span class="number">6</span>; x3++)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(x3 == x2 || x3 == x1 || x3 == x0) <span class="keyword">continue</span>;</span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> x4 = <span class="number">1</span>; x4 &lt; <span class="number">6</span>; x4++)&#123;</span><br><span class="line">                        <span class="keyword">if</span>(x4 == x3 || x4 == x2 || x4 == x1 || x4 == x0) <span class="keyword">continue</span>;</span><br><span class="line">                        <span class="keyword">double</span> d = distance[<span class="number">0</span>][x0] + distance[x0][x1] + distance[x1][x2] +</span><br><span class="line">                                    distance[x2][x3] + distance[x3][x4] + distance[x4][<span class="number">0</span>];</span><br><span class="line">                        res = (res &gt; d) ? d : res;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; res &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用死亡5循环，无论怎样，还是过了。 算法复杂度怎么说也是 $O(1)$.  </p>
+<h1 id="第三题"><a href="#第三题" class="headerlink" title="第三题"></a>第三题</h1><p>切水果问题</p>
+<p>一张图大小40 * 50, 给一个N值(0 &lt; N &lt; 36), 然后给出N个点（水果），输出最少能用多少条线使得水果消失。</p>
+<p>一个点只有4种切法，横、竖以及两条对角线。</p>
+<p>左上角是(0, 0)，右下角是(39, 49)。(感觉不重要)</p>
+<h2 id="例子-2"><a href="#例子-2" class="headerlink" title="例子"></a>例子</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">2</span><br><span class="line">2 3</span><br><span class="line">0 0</span><br><span class="line">输出：</span><br><span class="line">2</span><br><span class="line">解释：</span><br><span class="line">最少要2条线</span><br></pre></td></tr></table></figure>
+<p>想了一个多小时，想不出怎么做，牛客网里有人用贪心算法做，过了80%。就是每次选最多点共线的线，但是解决不了4个点组成’Z’型的情况。如果先选竖，则要切3刀，但先选横，只要2刀。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/面试题/" rel="tag"># 面试题</a>
+          
+            <a href="/tags/华为/" rel="tag"># 华为</a>
+          
+            <a href="/tags/C/" rel="tag"># C++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/27/aa-md/" rel="next" title="参考教程">
+                <i class="fa fa-chevron-left"></i> 参考教程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">PJONE</p>
+              <div class="site-description motion-element" itemprop="description">PJONE的博客</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/yourname" title="GitHub &rarr; https://github.com/yourname" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:yourname@gmail.com" title="E-Mail &rarr; mailto:yourname@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一题"><span class="nav-number">1.</span> <span class="nav-text">第一题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">1.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二题"><span class="nav-number">2.</span> <span class="nav-text">第二题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子-1"><span class="nav-number">2.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三题"><span class="nav-number">3.</span> <span class="nav-text">第三题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子-2"><span class="nav-number">3.1.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PJONE</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
