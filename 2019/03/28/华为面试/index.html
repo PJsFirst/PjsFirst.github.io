@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="PJONE">
 <meta property="og:description" content="华为3道笔试题，2个小时，共600分，做出了2道，有点虚。第一题是送分题，最后一道没有思路，有想法后再更新。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-28T12:20:42.315Z">
+<meta property="og:updated_time" content="2019-03-28T12:21:19.365Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019-3-27华为实习春招笔试">
 <meta name="twitter:description" content="华为3道笔试题，2个小时，共600分，做出了2道，有点虚。第一题是送分题，最后一道没有思路，有想法后再更新。">
@@ -383,7 +383,7 @@
                 
               
 
-              <time title="创建时间：2019-03-28 18:40:12 / 修改时间：20:20:42" itemprop="dateCreated datePublished" datetime="2019-03-28T18:40:12+08:00">2019-03-28</time>
+              <time title="创建时间：2019-03-28 18:40:12 / 修改时间：20:21:19" itemprop="dateCreated datePublished" datetime="2019-03-28T18:40:12+08:00">2019-03-28</time>
             
 
             
@@ -511,6 +511,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/03/28/解决markdown数学公式/" rel="prev" title="解决markdown数学公式">
+                解决markdown数学公式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -578,7 +582,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -599,9 +603,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -861,6 +863,53 @@
   
 
   
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
 
   
 
