@@ -107,7 +107,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/28/怎么写博客/font-matter.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/28/怎么写博客/怎么写博客/font-matter.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/28/怎么写博客/font-matter.png">
-<meta property="og:updated_time" content="2019-03-29T14:58:23.127Z">
+<meta property="og:updated_time" content="2019-03-29T17:09:45.090Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="怎么用hexo写博客">
 <meta name="twitter:description" content="先前一直用csdn写博客，插入图片加链接啥的都很简单，现在想在本地写了，和之前有些不同。">
@@ -191,6 +191,10 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
+    
+      
+        <p class="site-subtitle">PJ博客</p>
+      
     
     
   </div>
@@ -338,6 +342,8 @@
   
 
   
+    <div class="reading-progress-bar"></div>
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
@@ -404,7 +410,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-29 22:58:23" itemprop="dateModified" datetime="2019-03-29T22:58:23+08:00">2019-03-29</time>
+                <time title="修改时间：2019-03-30 01:09:45" itemprop="dateModified" datetime="2019-03-30T01:09:45+08:00">2019-03-30</time>
               
             
           </span>
@@ -438,11 +444,44 @@
           
 
           
-
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
           
 
           
-            <div class="post-description">先前一直用csdn写博客，插入图片加链接啥的都很简单，现在想在本地写了，和之前有些不同。</div>
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">2.4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 分钟</span>
+              
+            </div>
+          
+
           
 
         </div>
@@ -458,7 +497,11 @@
       
 
       
-        <h1 id="在hexo写markdown"><a href="#在hexo写markdown" class="headerlink" title="在hexo写markdown"></a>在hexo写markdown</h1><h2 id="1-创建新文章"><a href="#1-创建新文章" class="headerlink" title="1.创建新文章"></a>1.创建新文章</h2><p>在终端输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new 博客名.md</span><br></pre></td></tr></table></figure></p>
+        <div class="note ">
+            <p>先前一直用csdn写博客，插入图片加链接啥的都很简单，现在想在本地写了，和之前有些不同。</p>
+          </div>
+<a id="more"></a>
+<h1 id="在hexo写markdown"><a href="#在hexo写markdown" class="headerlink" title="在hexo写markdown"></a>在hexo写markdown</h1><h2 id="1-创建新文章"><a href="#1-创建新文章" class="headerlink" title="1.创建新文章"></a>1.创建新文章</h2><p>在终端输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new 博客名.md</span><br></pre></td></tr></table></figure></p>
 <p>你就会发现在source/_posts上出现你刚建的博客文件。</p>
 <p>直接在source/_posts上新建也不是不行，只是用这个命令会帮你添加一些东西。比如下面的Font-matter</p>
 <h2 id="2-Front-matter"><a href="#2-Front-matter" class="headerlink" title="2.Front-matter"></a>2.Front-matter</h2><p>Front-matter 是文件最上方以 — 分隔的区域，用于指定个别文件的变量。如果用上面的命令新建的话，会帮你生成title和date。</p>
@@ -475,10 +518,12 @@
 <tr>
 <td>title</td>
 <td>布局</td>
+<td></td>
 </tr>
 <tr>
 <td>title</td>
-<td>标题    </td>
+<td>标题</td>
+<td></td>
 </tr>
 <tr>
 <td>date</td>
@@ -497,15 +542,15 @@
 </tr>
 <tr>
 <td>tags</td>
-<td>标签（不适用于分页）    </td>
+<td>标签（不适用于分页）</td>
 </tr>
 <tr>
 <td>categories</td>
-<td>分类（不适用于分页）    </td>
+<td>分类（不适用于分页）</td>
 </tr>
 <tr>
 <td>permalink</td>
-<td>覆盖文章网址    </td>
+<td>覆盖文章网址</td>
 </tr>
 </tbody>
 </table>
@@ -523,7 +568,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% asset_img font-matter.png This is an example image %&#125;</span><br></pre></td></tr></table></figure>
 <p>效果是这样的。</p>
 <img src="/2019/03/28/怎么写博客/font-matter.png" title="This is an example image">
-<p>类似的标签插件还有quote、code之类的，但这些用markdown显示没有问题，那就直接用markdown语法就好了嘛。</p>
+<p>类似的标签插件还有quote、code之类的，<del>但这些用markdown显示没有问题，那就直接用markdown语法就好了嘛。</del></p>
 <h2 id="4-资源文件夹"><a href="#4-资源文件夹" class="headerlink" title="4.资源文件夹"></a>4.资源文件夹</h2><p>每次都建一个文件夹有点麻烦，实际上不是这样操作的。</p>
 <p>在_config.yum里面设置一下，就可以实现当你新建博客时，自动帮你新建同名同级的资源文件夹。</p>
 <p>把post_asset_folder设为true</p>
@@ -533,12 +578,28 @@
 <p>查看-&gt;命令面板-&gt;搜索”markdown preview enhanced: extend parser”-&gt;在parse.js中修改onWillParseMarkdown方法。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">onWillParseMarkdown: <span class="function"><span class="keyword">function</span>(<span class="params">markdown</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>)=&gt;</span> &#123;</span><br><span class="line">      markdown = markdown.replace(</span><br><span class="line">        /\&#123;%\s*asset_img\s*(.*)\s*%\&#125;/g,</span><br><span class="line">        (whole, content) =&gt; (<span class="string">`![](<span class="subst">$&#123;content&#125;</span>)`</span>)</span><br><span class="line">      )</span><br><span class="line">      <span class="keyword">return</span> resolve(markdown)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <p>这样就完美支持了。</p>
+<h2 id="举一反三"><a href="#举一反三" class="headerlink" title="举一反三"></a>举一反三</h2><p>后面发现这些标签还真的挺漂亮，比如note标签，如果用markdown的语法是大于号。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="quote">&gt; mardown的引用</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>markdown的引用</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% note primary %&#125;hexo的引用&#123;% endnote%&#125;</span><br></pre></td></tr></table></figure>
+<div class="note primary">
+            <p>hexo的引用 </p>
+          </div>
+<p>修改代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">markdown = markdown.replace(</span><br><span class="line">        /\&#123;%\s*note primary\s%&#125;(.*)&#123;%\s*endnote\s*%\&#125;/g,</span><br><span class="line">        (whole, content) =&gt; (<span class="string">`&gt; <span class="subst">$&#123;content&#125;</span>`</span>)</span><br><span class="line">      )</span><br></pre></td></tr></table></figure>
+<p>我比较喜欢primary样式，默认就这种咯，喜欢别的<a href="https://theme-next.iissnan.com/tag-plugins.html" target="_blank" rel="noopener">样式</a>就自行修改就好。</p>
 <h2 id="插入公式"><a href="#插入公式" class="headerlink" title="插入公式"></a>插入公式</h2><p>还比较常用的是公式，默认是不加载引擎的。参考<a href="https://blog.captainp.cn/2019/03/28/%E8%A7%A3%E5%86%B3markdown%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/" target="_blank" rel="noopener">解决方案</a>。</p>
 
       
     </div>
 
     
+      
+
+
+    
 
     
     
@@ -551,6 +612,30 @@
     
     
 
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>PJONE</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="http://yoursite.com/2019/03/28/怎么写博客/" title="怎么用hexo写博客">http://yoursite.com/2019/03/28/怎么写博客/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
     
 
     <footer class="post-footer">
@@ -728,7 +813,7 @@
                   
                     
                   
-                  <a href="https://github.com/yourname" title="GitHub &rarr; https://github.com/yourname" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  <a href="https://github.com/pjsfirst" title="GitHub &rarr; https://github.com/pjsfirst" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
                 </span>
               
                 <span class="links-of-author-item">
@@ -739,12 +824,44 @@
                   
                     
                   
-                  <a href="mailto:yourname@gmail.com" title="E-Mail &rarr; mailto:yourname@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  <a href="mailto:903794757@qq.com" title="QQ邮箱 &rarr; mailto:903794757@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>QQ邮箱</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/pjsfirstlaw" title="CSDN &rarr; https://blog.csdn.net/pjsfirstlaw" rel="noopener" target="_blank"><i class="fa fa-fw fa-CSDN"></i>CSDN</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://gitee.com/panjianone/projects" title="码云 &rarr; https://gitee.com/panjianone/projects" rel="noopener" target="_blank"><i class="fa fa-fw fa-gitee"></i>码云</a>
                 </span>
               
             </div>
           
 
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+              
+                
+              
+              
+              
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+             </div>
           
 
           
@@ -769,7 +886,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#在hexo写markdown"><span class="nav-number">1.</span> <span class="nav-text">在hexo写markdown</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-创建新文章"><span class="nav-number">1.1.</span> <span class="nav-text">1.创建新文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Front-matter"><span class="nav-number">1.2.</span> <span class="nav-text">2.Front-matter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-图片的插入"><span class="nav-number">1.3.</span> <span class="nav-text">3.图片的插入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-资源文件夹"><span class="nav-number">1.4.</span> <span class="nav-text">4.资源文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地预览图片"><span class="nav-number">1.5.</span> <span class="nav-text">本地预览图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入公式"><span class="nav-number">1.6.</span> <span class="nav-text">插入公式</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#在hexo写markdown"><span class="nav-number">1.</span> <span class="nav-text">在hexo写markdown</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-创建新文章"><span class="nav-number">1.1.</span> <span class="nav-text">1.创建新文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Front-matter"><span class="nav-number">1.2.</span> <span class="nav-text">2.Front-matter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-图片的插入"><span class="nav-number">1.3.</span> <span class="nav-text">3.图片的插入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-资源文件夹"><span class="nav-number">1.4.</span> <span class="nav-text">4.资源文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地预览图片"><span class="nav-number">1.5.</span> <span class="nav-text">本地预览图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#举一反三"><span class="nav-number">1.6.</span> <span class="nav-text">举一反三</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入公式"><span class="nav-number">1.7.</span> <span class="nav-text">插入公式</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -797,7 +914,25 @@
   <span class="author" itemprop="copyrightHolder">PJONE</span>
 
   
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">8k</span>
+  
 
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">7 分钟</span>
   
 </div>
 
@@ -816,6 +951,32 @@
 
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
 
 
 
@@ -873,6 +1034,8 @@
 
 
 
+  
+
 
 
   
@@ -883,6 +1046,9 @@
 
   
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
 
 
   
@@ -1003,6 +1169,38 @@
   
 
   
+<script>
+  $('.highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('复制');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
 
   
 
