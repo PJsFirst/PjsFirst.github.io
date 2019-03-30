@@ -498,12 +498,12 @@
 </blockquote>
 <a id="more"></a>
 <h1 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h1><p>关于大小端的问题，一串字符串长9个字符，第一个字符为‘0’则代表是小端，第一个字符为‘1’则代表是大端，给你一个数字表示字符串的个数，和一行字符串（全部字符串连接在一起了），输出对应数据的大端表示，每串字符串之间有一个空格。</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">2</span><br><span class="line">&quot;012345678112345678&quot;</span><br><span class="line">输出：</span><br><span class="line">&quot;87654321 12345678&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="string">"012345678112345678"</span></span><br><span class="line">输出：</span><br><span class="line"><span class="string">"87654321 12345678"</span></span><br></pre></td></tr></table></figure>
 <h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>这题是比较简单，其实大端小端我都记得不太清楚，虽然经常接触。但在这里只要简单地实现为当第一个字符为’0’时，将字符串倒序输出，当第一个字符为’1’时，将字符串输出。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">string</span> s;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; s;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> pos = <span class="number">9</span> * i;</span><br><span class="line">        <span class="keyword">if</span>(s[pos] == <span class="string">'0'</span>)&#123;</span><br><span class="line">            <span class="comment">//小端</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">8</span>; j &gt; <span class="number">0</span>; j--)&#123;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; s[pos + j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">//大端</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; <span class="number">9</span>; j++)&#123;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; s[pos + j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="第二题"><a href="#第二题" class="headerlink" title="第二题"></a>第二题</h1><p>关于旅行商问题的，给你5个坐标，表示5个地方的位置，从（0，0）出发，计算访问5个顶点然后回到原点的最短距离。输入的点是不会重复的。</p>
 <p>时间限制：3s</p>
-<h2 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">300 200 300 100 300 400 300 300 300 0</span><br><span class="line">输出：</span><br><span class="line">1200</span><br><span class="line">解释：先去点5，再去点2，再去点1，再去点5，再去点3，再回到原点</span><br></pre></td></tr></table></figure>
+<h2 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h2><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line"><span class="number">300</span> <span class="number">200</span> <span class="number">300</span> <span class="number">100</span> <span class="number">300</span> <span class="number">400</span> <span class="number">300</span> <span class="number">300</span> <span class="number">300</span> <span class="number">0</span></span><br><span class="line">输出：</span><br><span class="line"><span class="number">1200</span></span><br><span class="line">解释：先去点<span class="number">5</span>，再去点<span class="number">2</span>，再去点<span class="number">1</span>，再去点<span class="number">5</span>，再去点<span class="number">3</span>，再回到原点</span><br></pre></td></tr></table></figure>
 <p>这题是想得比较久的，这在之前的算法课是相似的，只不过不是5个坐标，而是N个坐标。如果是N个坐标，这就是著名的旅行商的问题。这个是NP难问题。我的天，不会想让我用模拟退火法或者遗传算法之类的人工智能算法吧！  </p>
 <p>只给我3s，我不知道能不能用模拟退火法跑出结果。之前在比较大的数据集里写过这个算法，我不确定能不能得到准确的结果。因此在笔试中，试图用其他方法来解。</p>
 <h2 id="解决方法-1"><a href="#解决方法-1" class="headerlink" title="解决方法"></a>解决方法</h2><p>最终还是选择用暴力破解。总共才5 <em> 4 </em> 3 <em> 2 </em> 1 = 120种方法，只要全部遍历，记录最短的，返回就好了。</p>
@@ -514,7 +514,7 @@
 <p>一张图大小40 * 50, 给一个N值(0 &lt; N &lt; 36), 然后给出N个点（水果），输出最少能用多少条线使得水果消失。</p>
 <p>一个点只有4种切法，横、竖以及两条对角线。</p>
 <p>左上角是(0, 0)，右下角是(39, 49)。(感觉不重要)</p>
-<h2 id="例子-2"><a href="#例子-2" class="headerlink" title="例子"></a>例子</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">2</span><br><span class="line">2 3</span><br><span class="line">0 0</span><br><span class="line">输出：</span><br><span class="line">2</span><br><span class="line">解释：</span><br><span class="line">最少要2条线</span><br></pre></td></tr></table></figure>
+<h2 id="例子-2"><a href="#例子-2" class="headerlink" title="例子"></a>例子</h2><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">2</span> <span class="number">3</span></span><br><span class="line"><span class="number">0</span> <span class="number">0</span></span><br><span class="line">输出：</span><br><span class="line"><span class="number">2</span></span><br><span class="line">解释：</span><br><span class="line">最少要<span class="number">2</span>条线</span><br></pre></td></tr></table></figure>
 <p>想了一个多小时，想不出怎么做，牛客网里有人用贪心算法做，过了80%。就是每次选最多点共线的线，但是解决不了4个点组成’Z’型的情况。如果先选竖，则要切3刀，但先选横，只要2刀。</p>
 
       
@@ -813,7 +813,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一题"><span class="nav-number">1.</span> <span class="nav-text">第一题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">1.1.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方法"><span class="nav-number">1.2.</span> <span class="nav-text">解决方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二题"><span class="nav-number">2.</span> <span class="nav-text">第二题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子-1"><span class="nav-number">2.1.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方法-1"><span class="nav-number">2.2.</span> <span class="nav-text">解决方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三题"><span class="nav-number">3.</span> <span class="nav-text">第三题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子-2"><span class="nav-number">3.1.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一题"><span class="nav-text">第一题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方法"><span class="nav-text">解决方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二题"><span class="nav-text">第二题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子-1"><span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方法-1"><span class="nav-text">解决方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三题"><span class="nav-text">第三题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子-2"><span class="nav-text">例子</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -864,15 +864,9 @@
 </div>
 
 
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
 
 
 
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.0.1</div>
 
 
 
@@ -1096,38 +1090,6 @@
   
 
   
-<script>
-  $('.highlight').each(function(i, e) {
-    var $wrap = $('<div>').addClass('highlight-wrap');
-    $(e).after($wrap);
-    $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
-      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
-        return $(e).text();
-      }).toArray().join('\n');
-      var ta = document.createElement('textarea');
-      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
-      ta.style.top = yPosition + 'px'; // Prevent page scroll
-      ta.style.position = 'absolute';
-      ta.style.opacity = '0';
-      ta.readOnly = true;
-      ta.value = code;
-      document.body.appendChild(ta);
-      ta.select();
-      ta.setSelectionRange(0, code.length);
-      ta.readOnly = false;
-      var result = document.execCommand('copy');
-      
-      ta.blur(); // For iOS
-      $(this).blur();
-    })).on('mouseleave', function(e) {
-      var $b = $(this).find('.copy-btn');
-      setTimeout(function() {
-        $b.text('复制');
-      }, 300);
-    }).append(e);
-  })
-</script>
-
 
   
 
