@@ -1,3 +1,4 @@
+http://blog.captainp.cn/2019/06/01/软件测试Assignment6/
 http://blog.captainp.cn/2019/05/25/系统分析第5次作业/
 http://blog.captainp.cn/2019/05/25/系统分析第4次作业/
 http://blog.captainp.cn/2019/05/23/pytest/

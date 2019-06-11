@@ -105,7 +105,7 @@
 <meta property="og:description" content="先前一直用csdn写博客，插入图片加链接啥的都很简单，现在想在本地写了，和之前有些不同。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://blog.captainp.cn/2019/03/28/怎么写博客/font-matter.png">
-<meta property="og:updated_time" content="2019-04-02T06:27:32.280Z">
+<meta property="og:updated_time" content="2019-06-11T15:56:16.969Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="怎么用hexo写博客">
 <meta name="twitter:description" content="先前一直用csdn写博客，插入图片加链接啥的都很简单，现在想在本地写了，和之前有些不同。">
@@ -425,7 +425,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-02 14:27:32" itemprop="dateModified" datetime="2019-04-02T14:27:32+08:00">2019-04-02</time>
+                <time title="修改时间：2019-06-11 23:56:16" itemprop="dateModified" datetime="2019-06-11T23:56:16+08:00">2019-06-11</time>
               
             
           </span>
@@ -478,7 +478,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.6k</span>
+                <span title="本文字数">3.1k</span>
               
 
               
@@ -492,7 +492,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">2 分钟</span>
+                <span title="阅读时长">3 分钟</span>
               
             </div>
           
@@ -596,6 +596,12 @@
 <blockquote>
 <p>后续：后来发现还是不行！我的天，本地预览图片还是要放在同目录下才行（莫非当时写这篇博客时同目录下我也放了图片？）。我在想，parser.js的有没有办法得到要解析的文件名，不懂，或者其他办法。还是用标签就好了吧，虽然本地看不到，但是hexo ser之后也可以看效果。</p>
 </blockquote>
+<blockquote>
+<p>后续的后续：想到了一个渣渣的做法，勉强解决问题。hexo中图片的语法是这样的。</p>
+</blockquote>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"></span><span class="template-tag">&#123;%<span class="name">asset_img</span> 注释 图片 %&#125;</span><span class="xml"></span></span><br></pre></td></tr></table></figure>
+<p>我们可以利用这个，将注释 变为文件夹的名字，然后在vscode中将注释变为文件夹的名字，就能在vscode中显示出来，同时在hexo也没影响。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">onWillParseMarkdown: <span class="function"><span class="keyword">function</span>(<span class="params">markdown</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>)=&gt;</span> &#123;</span><br><span class="line">      </span><br><span class="line">      markdown = markdown.replace(</span><br><span class="line">        /\&#123;%\s*asset_img\s*(.*)\s*%\&#125;/g,</span><br><span class="line">        (whole, content) =&gt; (<span class="string">`![](./<span class="subst">$&#123;content.split(<span class="string">' '</span>)[<span class="number">0</span>]&#125;</span>/<span class="subst">$&#123;content.split(<span class="string">' '</span>)[<span class="number">2</span>]&#125;</span>)`</span>)</span><br><span class="line">      )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="6-举一反三"><a href="#6-举一反三" class="headerlink" title="6.举一反三"></a>6.举一反三</h2><p>后面发现这些标签还真的挺漂亮，比如note标签，如果用markdown的语法是大于号。</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="quote">&gt; mardown的引用</span></span><br></pre></td></tr></table></figure>
 <blockquote>
@@ -788,7 +794,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -989,7 +995,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">87k</span>
+    <span title="站点总字数">88k</span>
   
 
   
@@ -1000,7 +1006,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">1:19</span>
+    <span title="站点阅读时长">1:20</span>
   
 </div>
 
