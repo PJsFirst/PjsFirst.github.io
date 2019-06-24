@@ -96,27 +96,29 @@
 
 
 
-  <meta name="description" content="Assignment Solution第6列(1) C1售货机可找零，C2投入1元硬币，C4按下橙汁按钮(2) E23退还5角硬币，E24送出橙汁饮料(3)  $$ C4 \vee C5 =&amp;gt; T12 $$     $$ C2 \wedge T12 =&amp;gt; T11 $$     $$ C1 \wedge T11 =&amp;gt; T13 $$     $$ T13 =&amp;gt; E23 $$">
-<meta name="keywords" content="软件复杂性分析">
+  <meta name="description" content="Homework1. 使用类图，分别对 Asg_RH 文档中 Make Reservation 用例以及 Payment 用例开展领域建模。然后，根据上述模型，给出建议的数据表以及主要字段，特别是主键和外键。 注意事项： 对象必须是名词、特别是技术名词、报表、描述类的处理； 关联必须有多重性、部分有名称与导航方向 属性要注意计算字段   数据建模，为了简化描述仅需要给出表清单，例如： Hotel（">
+<meta name="keywords" content="UML,系统分析">
 <meta property="og:type" content="article">
-<meta property="og:title" content="软件测试Assignment6">
-<meta property="og:url" content="http://blog.captainp.cn/2019/06/01/软件测试Assignment6/index.html">
+<meta property="og:title" content="swsad_hw7">
+<meta property="og:url" content="http://blog.captainp.cn/2019/06/15/swsad-hw7/index.html">
 <meta property="og:site_name" content="PJONE">
-<meta property="og:description" content="Assignment Solution第6列(1) C1售货机可找零，C2投入1元硬币，C4按下橙汁按钮(2) E23退还5角硬币，E24送出橙汁饮料(3)  $$ C4 \vee C5 =&amp;gt; T12 $$     $$ C2 \wedge T12 =&amp;gt; T11 $$     $$ C1 \wedge T11 =&amp;gt; T13 $$     $$ T13 =&amp;gt; E23 $$">
+<meta property="og:description" content="Homework1. 使用类图，分别对 Asg_RH 文档中 Make Reservation 用例以及 Payment 用例开展领域建模。然后，根据上述模型，给出建议的数据表以及主要字段，特别是主键和外键。 注意事项： 对象必须是名词、特别是技术名词、报表、描述类的处理； 关联必须有多重性、部分有名称与导航方向 属性要注意计算字段   数据建模，为了简化描述仅需要给出表清单，例如： Hotel（">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://blog.captainp.cn/2019/06/01/软件测试Assignment6/assignment.png">
-<meta property="og:updated_time" content="2019-06-12T04:48:37.663Z">
+<meta property="og:image" content="http://blog.captainp.cn/2019/06/15/swsad-hw7/reservation.png">
+<meta property="og:image" content="http://blog.captainp.cn/2019/06/15/swsad-hw7/payment.png">
+<meta property="og:image" content="http://blog.captainp.cn/2019/06/15/swsad-hw7/order.png">
+<meta property="og:updated_time" content="2019-06-24T08:53:54.584Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="软件测试Assignment6">
-<meta name="twitter:description" content="Assignment Solution第6列(1) C1售货机可找零，C2投入1元硬币，C4按下橙汁按钮(2) E23退还5角硬币，E24送出橙汁饮料(3)  $$ C4 \vee C5 =&amp;gt; T12 $$     $$ C2 \wedge T12 =&amp;gt; T11 $$     $$ C1 \wedge T11 =&amp;gt; T13 $$     $$ T13 =&amp;gt; E23 $$">
-<meta name="twitter:image" content="http://blog.captainp.cn/2019/06/01/软件测试Assignment6/assignment.png">
+<meta name="twitter:title" content="swsad_hw7">
+<meta name="twitter:description" content="Homework1. 使用类图，分别对 Asg_RH 文档中 Make Reservation 用例以及 Payment 用例开展领域建模。然后，根据上述模型，给出建议的数据表以及主要字段，特别是主键和外键。 注意事项： 对象必须是名词、特别是技术名词、报表、描述类的处理； 关联必须有多重性、部分有名称与导航方向 属性要注意计算字段   数据建模，为了简化描述仅需要给出表清单，例如： Hotel（">
+<meta name="twitter:image" content="http://blog.captainp.cn/2019/06/15/swsad-hw7/reservation.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://blog.captainp.cn/2019/06/01/软件测试Assignment6/">
+  <link rel="canonical" href="http://blog.captainp.cn/2019/06/15/swsad-hw7/">
 
 
 
@@ -126,7 +128,7 @@
   };
 </script>
 
-  <title>软件测试Assignment6 | PJONE</title>
+  <title>swsad_hw7 | PJONE</title>
   
 
 
@@ -365,7 +367,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.captainp.cn/2019/06/01/软件测试Assignment6/">
+    <link itemprop="mainEntityOfPage" href="http://blog.captainp.cn/2019/06/15/swsad-hw7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="PJONE">
@@ -382,7 +384,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">软件测试Assignment6
+          <h1 class="post-title" itemprop="name headline">swsad_hw7
 
               
             
@@ -408,7 +410,7 @@
                 
               
 
-              <time title="创建时间：2019-06-01 08:41:40" itemprop="dateCreated datePublished" datetime="2019-06-01T08:41:40+08:00">2019-06-01</time>
+              <time title="创建时间：2019-06-15 21:54:18" itemprop="dateCreated datePublished" datetime="2019-06-15T21:54:18+08:00">2019-06-15</time>
             
 
             
@@ -425,7 +427,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-12 12:48:37" itemprop="dateModified" datetime="2019-06-12T12:48:37+08:00">2019-06-12</time>
+                <time title="修改时间：2019-06-24 16:53:54" itemprop="dateModified" datetime="2019-06-24T16:53:54+08:00">2019-06-24</time>
               
             
           </span>
@@ -442,7 +444,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/软件测试/" itemprop="url" rel="index"><span itemprop="name">软件测试</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/系统分析/" itemprop="url" rel="index"><span itemprop="name">系统分析</span></a></span>
 
                 
                 
@@ -478,7 +480,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">442</span>
+                <span title="本文字数">1.1k</span>
               
 
               
@@ -512,9 +514,31 @@
       
 
       
-        <h1 id="Assignment"><a href="#Assignment" class="headerlink" title="Assignment"></a>Assignment</h1><img src="/2019/06/01/软件测试Assignment6/assignment.png" class="软件测试Assignment6">
-<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><h2 id="第6列"><a href="#第6列" class="headerlink" title="第6列"></a>第6列</h2><p>(1) C1售货机可找零，C2投入1元硬币，C4按下橙汁按钮<br>(2) E23退还5角硬币，E24送出橙汁饮料<br>(3)  $$ C4 \vee C5 =&gt; T12 $$<br>     $$ C2 \wedge T12 =&gt; T11 $$<br>     $$ C1 \wedge T11 =&gt; T13 $$<br>     $$ T13 =&gt; E23 $$<br>     $$ C3 \vee T13 =&gt; T14 $$<br>     $$ C4 \wedge T14 =&gt; E24 $$</p>
-<h2 id="第23列"><a href="#第23列" class="headerlink" title="第23列"></a>第23列</h2><p>(1) C2投入1元硬币，C5按下橙汁按钮<br>(2) E21零钱找完灯亮，E22退还1元硬币<br>(3) $$ C4 \vee C5 =&gt; T12 $$<br>    $$ C2 \wedge T12 =&gt; T11 $$<br>    $$ \neg C1 \wedge T11 =&gt; E22 $$<br>    $$ \neg C1 =&gt; E21 $$</p>
+        <h1 id="Homework"><a href="#Homework" class="headerlink" title="Homework"></a>Homework</h1><h2 id="1-使用类图，分别对-Asg-RH-文档中-Make-Reservation-用例以及-Payment-用例开展领域建模。然后，根据上述模型，给出建议的数据表以及主要字段，特别是主键和外键。"><a href="#1-使用类图，分别对-Asg-RH-文档中-Make-Reservation-用例以及-Payment-用例开展领域建模。然后，根据上述模型，给出建议的数据表以及主要字段，特别是主键和外键。" class="headerlink" title="1. 使用类图，分别对 Asg_RH 文档中 Make Reservation 用例以及 Payment 用例开展领域建模。然后，根据上述模型，给出建议的数据表以及主要字段，特别是主键和外键。"></a>1. 使用类图，分别对 <a href="https://sysu-swsad.github.io/swad-guide/material/Asg_RH.pdf" target="_blank" rel="noopener">Asg_RH</a> 文档中 Make Reservation 用例以及 Payment 用例开展领域建模。然后，根据上述模型，给出建议的数据表以及主要字段，特别是主键和外键。</h2><ul>
+<li>注意事项：<ul>
+<li>对象必须是名词、特别是技术名词、报表、描述类的处理；</li>
+<li>关联必须有多重性、部分有名称与导航方向</li>
+<li>属性要注意计算字段</li>
+</ul>
+</li>
+<li>数据建模，为了简化描述仅需要给出表清单，例如：<ul>
+<li>Hotel（ID/Key，Name，LoctionID/Fkey，Address…..）</li>
+</ul>
+</li>
+</ul>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="1-Make-Reservation用例"><a href="#1-Make-Reservation用例" class="headerlink" title="1. Make Reservation用例"></a>1. Make Reservation用例</h3><img src="/2019/06/15/swsad-hw7/reservation.png" class="swsad-hw7">
+<p>数据表与主要字段</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">Customer</span><span class="params">(ID/key, FullName, EmailAdress)</span></span></span><br><span class="line"><span class="function"><span class="title">Location</span><span class="params">(ID/key, Name)</span></span></span><br><span class="line"><span class="function"><span class="title">Hotel</span><span class="params">(ID/key, Name, Adress, LocationID/Fkey)</span></span></span><br><span class="line"><span class="function"><span class="title">Reservation</span><span class="params">(ID/key, HotelID/Fkey, CustomerID/Fkey, BasketID/Fkey, check-in-date, num-of-night, check-out-date,...)</span></span></span><br><span class="line"><span class="function"><span class="title">RoomItem</span><span class="params">(ID/key, HotelID/Fkey, Children, AgeFrom, AgeTo)</span></span></span><br><span class="line"><span class="function"><span class="title">Room</span><span class="params">(ID/key, AvailableNum, ReservedNum, DescID/Fkey)</span></span></span><br><span class="line"><span class="function"><span class="title">RoomDesc</span><span class="params">(ID/key, list-price, info, RoomTypeID/Fkey)</span></span></span><br><span class="line"><span class="function"><span class="title">RoomType</span><span class="params">(ID/key, name)</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="2-payment用例"><a href="#2-payment用例" class="headerlink" title="2. payment用例"></a>2. payment用例</h3><img src="/2019/06/15/swsad-hw7/payment.png" class="swsad-hw7">
+<p>数据表与主要字段</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">Payment</span><span class="params">(ID/key, price, reserationID/Fkey, CreditCardID/Fkey)</span></span></span><br><span class="line"><span class="function"><span class="title">CreditCard</span><span class="params">(ID/key, type, CardNumber, CardSercurityCode, HolderAddrID/Fkey)</span></span></span><br><span class="line"><span class="function"><span class="title">HolderAddr</span><span class="params">(ID/key, type, title, FirstName,Last Name,...)</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="2-使用-UML-State-Model，对每个订单对象生命周期建模"><a href="#2-使用-UML-State-Model，对每个订单对象生命周期建模" class="headerlink" title="2. 使用 UML State Model，对每个订单对象生命周期建模"></a>2. 使用 UML State Model，对每个订单对象生命周期建模</h2><ul>
+<li>建模对象： 参考 <a href="https://sysu-swsad.github.io/swad-guide/material/Asg_RH.pdf" target="_blank" rel="noopener">Asg_RH</a> 文档,对Reservation/Order 对象建模。</li>
+<li>建模要求： 参考练习不能提供足够信息帮助你对订单对象建模，请参考现在定旅馆的旅游网站，尽可能分析围绕订单发生的各种情况，直到订单通过销售事件（柜台销售）结束订单。</li>
+</ul>
+<p>##Solution</p>
+<h3 id="对订单生命周期建模"><a href="#对订单生命周期建模" class="headerlink" title="对订单生命周期建模"></a>对订单生命周期建模</h3><p>还要加上个标题，而且一定要有开始状态和结束状态。</p>
+<img src="/2019/06/15/swsad-hw7/order.png" class="swsad-hw7">
 
       
     </div>
@@ -528,14 +552,28 @@
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="\2019\05\22\软件测试Assignment4\" rel="bookmark">软件测试Assignment4</a></div>
+      <div class="popular-posts-title"><a href="\2019\05\25\系统分析第4次作业\" rel="bookmark">系统分析第4次作业</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="\2019\05\22\软件测试Assignment5\" rel="bookmark">软件测试Assignment5</a></div>
+      <div class="popular-posts-title"><a href="\2019\03\31\系统分析第2次作业\" rel="bookmark">系统分析第2次作业</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\2019\05\25\系统分析第5次作业\" rel="bookmark">系统分析第5次作业</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\2019\04\15\系统分析第3次作业\" rel="bookmark">系统分析第3次作业</a></div>
       
     </li>
   
@@ -572,7 +610,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="http://blog.captainp.cn/2019/06/01/软件测试Assignment6/" title="软件测试Assignment6">http://blog.captainp.cn/2019/06/01/软件测试Assignment6/</a>
+    <a href="http://blog.captainp.cn/2019/06/15/swsad-hw7/" title="swsad_hw7">http://blog.captainp.cn/2019/06/15/swsad-hw7/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -585,7 +623,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/软件复杂性分析/" rel="tag"># 软件复杂性分析</a>
+            <a href="/tags/UML/" rel="tag"># UML</a>
+          
+            <a href="/tags/系统分析/" rel="tag"># 系统分析</a>
           
         </div>
       
@@ -598,8 +638,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/25/系统分析第5次作业/" rel="next" title="系统分析第5次作业">
-                <i class="fa fa-chevron-left"></i> 系统分析第5次作业
+              <a href="/2019/06/12/stmt-assign8/" rel="next" title="软件测试Assignment8">
+                <i class="fa fa-chevron-left"></i> 软件测试Assignment8
               </a>
             
           </div>
@@ -607,10 +647,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/11/stmt-assign7/" rel="prev" title="软件测试Assignment7">
-                软件测试Assignment7 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -849,7 +885,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Assignment"><span class="nav-text">Assignment</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Solution"><span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第6列"><span class="nav-text">第6列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第23列"><span class="nav-text">第23列</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Homework"><span class="nav-text">Homework</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-使用类图，分别对-Asg-RH-文档中-Make-Reservation-用例以及-Payment-用例开展领域建模。然后，根据上述模型，给出建议的数据表以及主要字段，特别是主键和外键。"><span class="nav-text">1. 使用类图，分别对 Asg_RH 文档中 Make Reservation 用例以及 Payment 用例开展领域建模。然后，根据上述模型，给出建议的数据表以及主要字段，特别是主键和外键。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solution"><span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Make-Reservation用例"><span class="nav-text">1. Make Reservation用例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-payment用例"><span class="nav-text">2. payment用例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-使用-UML-State-Model，对每个订单对象生命周期建模"><span class="nav-text">2. 使用 UML State Model，对每个订单对象生命周期建模</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对订单生命周期建模"><span class="nav-text">对订单生命周期建模</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

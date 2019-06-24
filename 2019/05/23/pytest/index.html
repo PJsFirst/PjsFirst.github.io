@@ -96,18 +96,22 @@
 
 
 
-  <meta name="description" content="在做项目的时候要测试工作，这里使用了pytest作为测试工具。">
+  <meta name="description" content="在做课程项目的时候，后端与前端分离工作，后端不可能等前端写完页面写逻辑的时候再验证后端写的API是否正确。我们应该要先测试好API的正确性。项目中使用了pytest作为测试工具，编写我们的测试样例。">
 <meta name="keywords" content="软件测试">
 <meta property="og:type" content="article">
-<meta property="og:title" content="pytest">
+<meta property="og:title" content="pytest测试API">
 <meta property="og:url" content="http://blog.captainp.cn/2019/05/23/pytest/index.html">
 <meta property="og:site_name" content="PJONE">
-<meta property="og:description" content="在做项目的时候要测试工作，这里使用了pytest作为测试工具。">
+<meta property="og:description" content="在做课程项目的时候，后端与前端分离工作，后端不可能等前端写完页面写逻辑的时候再验证后端写的API是否正确。我们应该要先测试好API的正确性。项目中使用了pytest作为测试工具，编写我们的测试样例。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-23T12:56:42.669Z">
+<meta property="og:image" content="http://blog.captainp.cn/2019/05/23/pytest/result.png">
+<meta property="og:image" content="http://blog.captainp.cn/2019/05/23/pytest/cov.png">
+<meta property="og:image" content="http://blog.captainp.cn/2019/05/23/pytest/user_cov.png">
+<meta property="og:updated_time" content="2019-06-24T08:59:54.717Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="pytest">
-<meta name="twitter:description" content="在做项目的时候要测试工作，这里使用了pytest作为测试工具。">
+<meta name="twitter:title" content="pytest测试API">
+<meta name="twitter:description" content="在做课程项目的时候，后端与前端分离工作，后端不可能等前端写完页面写逻辑的时候再验证后端写的API是否正确。我们应该要先测试好API的正确性。项目中使用了pytest作为测试工具，编写我们的测试样例。">
+<meta name="twitter:image" content="http://blog.captainp.cn/2019/05/23/pytest/result.png">
 
 
 
@@ -124,7 +128,7 @@
   };
 </script>
 
-  <title>pytest | PJONE</title>
+  <title>pytest测试API | PJONE</title>
   
 
 
@@ -380,7 +384,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">pytest
+          <h1 class="post-title" itemprop="name headline">pytest测试API
 
               
             
@@ -406,12 +410,24 @@
                 
               
 
-              <time title="创建时间：2019-05-23 20:12:27 / 修改时间：20:56:42" itemprop="dateCreated datePublished" datetime="2019-05-23T20:12:27+08:00">2019-05-23</time>
+              <time title="创建时间：2019-05-23 20:12:27" itemprop="dateCreated datePublished" datetime="2019-05-23T20:12:27+08:00">2019-05-23</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-24 16:59:54" itemprop="dateModified" datetime="2019-06-24T16:59:54+08:00">2019-06-24</time>
               
             
           </span>
@@ -464,7 +480,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.6k</span>
+                <span title="本文字数">5.4k</span>
               
 
               
@@ -478,7 +494,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 分钟</span>
+                <span title="阅读时长">5 分钟</span>
               
             </div>
           
@@ -499,9 +515,10 @@
 
       
         <blockquote>
-<p>在做项目的时候要测试工作，这里使用了pytest作为测试工具。</p>
+<p>在做课程项目的时候，后端与前端分离工作，后端不可能等前端写完页面写逻辑的时候再验证后端写的API是否正确。我们应该要先测试好API的正确性。项目中使用了pytest作为测试工具，编写我们的测试样例。</p>
 </blockquote>
 <a id="more"></a>
+<p>以下内容是教如何使用pytest书写测试样例的。<a href="http://flask.pocoo.org/docs/1.0/testing/" target="_blank" rel="noopener">官方教程</a>上有关于pytest的使用，但这个教程是前后端都是用flask产生，路由产生页面，而我们只是使用flask来编写API，返回的是Json数组，因此要简单不少。</p>
 <h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h2><p>使用pip或者conda一键式傻瓜安装</p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip <span class="keyword">install</span> pytest</span><br><span class="line">或者</span><br><span class="line">conda <span class="keyword">install</span> pytest</span><br></pre></td></tr></table></figure>
 <p>然后测试是否安装成功</p>
@@ -517,17 +534,45 @@
 </ul>
 </li>
 <li>当assert语句的条件为真时，测试通过，否则测试不通过。</li>
-</ul>
-<h2 id="3-Fixture"><a href="#3-Fixture" class="headerlink" title="3. Fixture"></a>3. Fixture</h2><p>我们可以简单的把Fixture理解为准备测试数据和初始化测试对象的阶段。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pytest</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line">users = [</span><br><span class="line">  &#123;<span class="string">"name"</span>:<span class="string">"jack"</span>,<span class="string">"password"</span>:<span class="string">"Iloverose"</span>&#125;,</span><br><span class="line">  &#123;<span class="string">"name"</span>:<span class="string">"rose"</span>,<span class="string">"password"</span>:<span class="string">"Ilovejack"</span>&#125;,</span><br><span class="line">  &#123;<span class="string">"name"</span>:<span class="string">"tom"</span>,<span class="string">"password"</span>:<span class="string">"password123"</span>&#125;,</span><br><span class="line">  &#123;<span class="string">"name"</span>:<span class="string">"mike"</span>,<span class="string">"password"</span>:<span class="string">"password"</span>&#125;,</span><br><span class="line">  &#123;<span class="string">"name"</span>:<span class="string">"james"</span>,<span class="string">"password"</span>:<span class="string">"AGoodPasswordWordShouldBeLongEnough"</span>&#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestUserPasswordWithParam</span><span class="params">(object)</span>:</span></span><br><span class="line"><span class="meta">    @pytest.fixture(params=users)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">user</span><span class="params">(self, request)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> request.param</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_user_password</span><span class="params">(self, user)</span>:</span></span><br><span class="line">        passwd = user[<span class="string">'password'</span>]</span><br><span class="line">        <span class="keyword">assert</span> len(passwd) &gt;= <span class="number">6</span></span><br><span class="line">        msg = <span class="string">"user %s has a weak password"</span> %(user[<span class="string">'name'</span>])</span><br><span class="line">        <span class="keyword">assert</span> passwd != <span class="string">'password'</span>, msg</span><br><span class="line">        <span class="keyword">assert</span> passwd != <span class="string">'password123'</span>, msg</span><br></pre></td></tr></table></figure>
-<ul>
-<li>使用@pytest.fixture装饰器可以定义feature</li>
-<li>在用例的参数中传递fixture的名称以便直接调用fixture，拿到fixture的返回值</li>
 <li>多个assert是递进关系，前1个assert断言失败后，后面的assert是不会运行的，因此重要的assert放到前面</li>
 <li>assert后加message, 可以很容易的判断出是哪条数据出了问题，所以定制可读性好的错误信息是很必要的</li>
 <li>任何1个断言失败以后，for循环就会退出，所以上面的用例1次只能发现1条错误数据，换句话说任何1个assert失败后，用例就终止运行了.</li>
 </ul>
-
+<p>如果想只运行某个文件或者某个函数，则使用下面的命令。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pytest test_mode.py</span><br><span class="line">pytest test_model<span class="selector-class">.py</span>::test_func</span><br></pre></td></tr></table></figure></p>
+<h2 id="3-confest与fixture"><a href="#3-confest与fixture" class="headerlink" title="3. confest与fixture"></a>3. confest与fixture</h2><p>新建一个confest.py作为配置文件，单独管理一些预置的操作场景，pytest里面默认读取conftest.py里面的配置。</p>
+<p>有以下几点需要注意：</p>
+<ul>
+<li>conftest.py配置脚本名称是固定的，不能改名称</li>
+<li>conftest.py与运行的用例要在同一个pakage下，并且有<strong>init</strong>.py文件</li>
+<li>不需要import导入 conftest.py，pytest用例会自动查找</li>
+</ul>
+<p>我们可以简单的把Fixture理解为准备测试数据和初始化测试对象的阶段。测试函数在每次调用前，就会运行一次fixture修饰的函数，得到返回值。</p>
+<p>来看我们项目中的例子。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 文件conftest.py</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> tempfile</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> pytest</span><br><span class="line"><span class="keyword">from</span> app <span class="keyword">import</span> create_app</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> app.db <span class="keyword">import</span> get_db, init_db</span><br><span class="line"><span class="keyword">with</span> open(os.path.join(os.path.dirname(__file__), <span class="string">'data.sql'</span>), <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    _data_sql = f.read().decode(<span class="string">'utf8'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@pytest.fixture</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">app</span><span class="params">()</span>:</span></span><br><span class="line">    db_fd, db_path = tempfile.mkstemp()</span><br><span class="line"></span><br><span class="line">    app = create_app()</span><br><span class="line">    app.config[<span class="string">'DATABASE'</span>] = db_path</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> app.app_context():</span><br><span class="line">        init_db()</span><br><span class="line">        get_db().executescript(_data_sql)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">yield</span> app   </span><br><span class="line"></span><br><span class="line">    os.close(db_fd)</span><br><span class="line">    os.unlink(db_path)</span><br><span class="line"></span><br><span class="line"><span class="meta">@pytest.fixture</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">client</span><span class="params">(app)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> app.test_client()</span><br></pre></td></tr></table></figure>
+<p>可以看到，我们定义了一个app函数，意味着每次运行时，都会创建该应用，而且会读取data.sql里面的数据库语句来初始化数据库，注意，这是新的数据库，跟你原来的不冲突，这能方便地帮助我们设计样例。同时定义了client，这能很好地模拟用户的行为，我们直接用client就行了，不用每次都定义。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_get_info_without_login</span><span class="params">(client, app, status_code, message)</span>:</span></span><br></pre></td></tr></table></figure>
+<p>在用例的参数中传递fixture的名称以便直接调用fixture，拿到fixture的返回值。上面的例子中，把clinet和app作为参数，后面的参数下面再解释。</p>
+<h2 id="4-测试函数与案例"><a href="#4-测试函数与案例" class="headerlink" title="4. 测试函数与案例"></a>4. 测试函数与案例</h2><p>我们只需要模拟用户的行为(POST,PUT,DELETE,GET)，然后检查返回的数据是不是与想像中的一样，而且检查数据库中的内容是否成功改变。</p>
+<p>看一个例子就能很明了了。<br>下面是一个得到用户登录的API的测试函数，这个函数会返回一个Header，作为下一步测试的输入。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_token_auth_headers</span><span class="params">(client, app, username_or_email, password, content_type = <span class="string">'application/json'</span>)</span>:</span></span><br><span class="line">    <span class="string">'''创建JSON Web Token认证的headers'''</span></span><br><span class="line">    headers = get_basic_auth_headers()</span><br><span class="line">    response = client.post(<span class="string">'/api/token/'</span>, headers=headers, data=json.dumps(&#123;<span class="string">'username_or_email'</span>:username_or_email, <span class="string">'password'</span>:password&#125;))</span><br><span class="line">    <span class="keyword">assert</span> response.status_code == <span class="number">201</span></span><br><span class="line">    response = json.loads(response.get_data(as_text=<span class="literal">True</span>))</span><br><span class="line">    token = response.get(<span class="string">'data'</span>)[<span class="string">'token'</span>]</span><br><span class="line">    <span class="keyword">assert</span> token <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="string">'Authorization'</span>: <span class="string">'Bearer '</span> + token,</span><br><span class="line">        <span class="string">'Accept'</span>: <span class="string">'application/json'</span>,</span><br><span class="line">        <span class="string">'Content-Type'</span>: content_type</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>我们要做的是，向/api/token接口post用户名和密码，然后验证返回的状态是否是201。app.test_client()就是flask中用来模拟用户行为的。若这个接口有修改数据库的内容，则还要检查数据库是否和预期的一致，例子请看下面。</p>
+<h2 id="5-pytest-mark-parametrize"><a href="#5-pytest-mark-parametrize" class="headerlink" title="5.pytest.mark.parametrize"></a>5.pytest.mark.parametrize</h2><p>一般而言，我们一个函数就测试一个API接口，但是一个用例往往是不够的，pytest.mark.parametrize就是用来给你的测试函数传参用的，很好地测试。</p>
+<p>下面是测试创建订单的API的测试函数。有了mark.parametrize的修饰，下面的函数就会运行10次，对应10次案例。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@pytest.mark.parametrize(('username', 'password', 'status_code', 'message', 'order_id', 'mission_id', 'state', 'rcv_num'), (</span></span><br><span class="line">    (<span class="string">'pj'</span>, <span class="string">'123456'</span>, <span class="number">201</span>,<span class="string">'Create order successfully'</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>),</span><br><span class="line">    (<span class="string">'pj'</span>, <span class="string">'123456'</span>, <span class="number">400</span>,<span class="string">'mission_id is invalid'</span>, <span class="number">3</span>, <span class="number">100</span>, <span class="number">0</span>, <span class="number">2</span>),</span><br><span class="line">    (<span class="string">'pj'</span>, <span class="string">'123456'</span>, <span class="number">201</span>, <span class="string">'Create order successfully'</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">100</span>),</span><br><span class="line">    (<span class="string">'pj'</span>, <span class="string">'123456'</span>, <span class="number">400</span>,<span class="string">'Mission is closed'</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">100</span>),</span><br><span class="line">    (<span class="string">'pj'</span>, <span class="string">'123456'</span>, <span class="number">400</span>,<span class="string">'Mission is closed'</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">50</span>),</span><br><span class="line">    (<span class="string">'pj'</span>, <span class="string">'123456'</span>, <span class="number">400</span>,<span class="string">'mission reached its dealine'</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">50</span>),</span><br><span class="line">    (<span class="string">'pj'</span>, <span class="string">'123456'</span>, <span class="number">201</span>,<span class="string">'Create order successfully'</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">1</span>),</span><br><span class="line">    (<span class="string">'pj'</span>, <span class="string">'123456'</span>, <span class="number">400</span>,<span class="string">'Mission is closed'</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">1</span>, <span class="number">1</span>),</span><br><span class="line">    (<span class="string">'pj'</span>, <span class="string">'123456'</span>, <span class="number">400</span>,<span class="string">'Mission is closed'</span>, <span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">0</span>),</span><br><span class="line">    (<span class="string">'pj'</span>, <span class="string">'123456'</span>, <span class="number">400</span>,<span class="string">'mission reached its dealine'</span>, <span class="number">3</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">0</span>)</span><br><span class="line">))</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_create_order</span><span class="params">(client, app, username, password, status_code, message, order_id, mission_id, state, rcv_num)</span>:</span></span><br><span class="line">    response = client.post(<span class="string">'api/order/'</span>,headers=get_token_auth_headers(client, app, username, password),data=json.dumps(&#123;<span class="string">'mission_id'</span>:mission_id&#125;))</span><br><span class="line">    <span class="keyword">assert</span> response</span><br><span class="line">    <span class="comment">#assert response.status_code == status_code</span></span><br><span class="line">    response_data = json.loads(response.get_data(as_text=<span class="literal">True</span>))</span><br><span class="line">    <span class="keyword">assert</span> response_data.get(<span class="string">'message'</span>) == message</span><br><span class="line">    <span class="keyword">if</span>(response.status_code == <span class="number">201</span>):  </span><br><span class="line">        <span class="keyword">assert</span> response_data.get(<span class="string">'data'</span>)[<span class="string">'order_id'</span>] == order_id</span><br><span class="line">    <span class="keyword">if</span>(mission_id == <span class="number">100</span>):</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">with</span> app.app_context():</span><br><span class="line">        mission = get_db().execute(<span class="string">'SELECT * FROM MissionInfo  WHERE idMissionInfo = ?'</span>, (mission_id,)).fetchone()</span><br><span class="line">        <span class="keyword">assert</span> mission</span><br><span class="line">        <span class="keyword">assert</span> mission[<span class="string">'state'</span>] == state</span><br><span class="line">        <span class="keyword">assert</span> mission[<span class="string">'rcv_num'</span>] == rcv_num</span><br></pre></td></tr></table></figure></p>
+<p>不必先调用接口创建新的mission，因为这不是这个测试的任务。mission表的内容是通过有fixture修饰的app函数读取到数据库里的。使用app.app_context()来读取现在数据库的内容，判断是否与预期的一致。</p>
+<hr>
+<p>有了以上的内容，我们就可以关心如何设计出好的<strong>测试样例</strong>了，想好前端可能会出现什么输入。这样，我们可以在测试中找到程序的bug，并且更好地了解需求。</p>
+<p>当然，测试通过率100%并不代表你的程序已经是没有bug了，因为有可能是你没有想好测试用例，或者是没有理解好需求，返回与需求不符的内容，导致功能是错误的。</p>
+<h2 id="6-测试报告"><a href="#6-测试报告" class="headerlink" title="6.测试报告"></a>6.测试报告</h2><p>测试完成之后肯定要来份报告，说明我的测试代码都覆盖了哪些区域。好在pytest也有相应的工具支持自动化自成测试报告。</p>
+<p>安装下面这个包，能支持输出多种格式的测试报告。</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pytest-conv</span><br></pre></td></tr></table></figure>
+<p>执行下面的命令，生成测试报告。</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pytest --cov-report=html</span><br></pre></td></tr></table></figure>
+<p>下面是终端的输出，因为在和前端交互的时候修改了许多，因此mission中有很多测例尚未修改，所以出现“F”。</p>
+<img src="/2019/05/23/pytest/result.png" class="pytest">
+<p>会在测试目录下生成一个htmlcov文件，里面存放着覆盖测试报告。</p>
+<img src="/2019/05/23/pytest/cov.png" class="pytest">
+<p>点进去之后还能看到具体哪行没有覆盖到。</p>
+<img src="/2019/05/23/pytest/user_cov.png" class="pytest">
       
     </div>
 
@@ -565,7 +610,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="http://blog.captainp.cn/2019/05/23/pytest/" title="pytest">http://blog.captainp.cn/2019/05/23/pytest/</a>
+    <a href="http://blog.captainp.cn/2019/05/23/pytest/" title="pytest测试API">http://blog.captainp.cn/2019/05/23/pytest/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -674,7 +719,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -744,7 +789,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">14</span>
+                      
+                    
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -840,7 +887,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-安装"><span class="nav-text">1.安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-快速入门"><span class="nav-text">2.快速入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Fixture"><span class="nav-text">3. Fixture</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-安装"><span class="nav-text">1.安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-快速入门"><span class="nav-text">2.快速入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-confest与fixture"><span class="nav-text">3. confest与fixture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-测试函数与案例"><span class="nav-text">4. 测试函数与案例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-pytest-mark-parametrize"><span class="nav-text">5.pytest.mark.parametrize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-测试报告"><span class="nav-text">6.测试报告</span></a></li></ol></div>
             
 
           </div>
@@ -875,7 +922,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">88k</span>
+    <span title="站点总字数">95k</span>
   
 
   
@@ -886,7 +933,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">1:20</span>
+    <span title="站点阅读时长">1:26</span>
   
 </div>
 
