@@ -422,7 +422,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-24 16:53:54" itemprop="dateModified" datetime="2019-06-24T16:53:54+08:00">2019-06-24</time>
+                <time title="修改时间：2019-07-09 12:34:54" itemprop="dateModified" datetime="2019-07-09T12:34:54+08:00">2019-07-09</time>
               
             
           </span>
@@ -503,34 +503,16 @@
 
       
         
+          <h1 id="Homework"><a href="#Homework" class="headerlink" title="Homework"></a>Homework</h1><h2 id="1-使用类图，分别对-Asg-RH-文档中-Make-Reservation-用例以及-Payment-用例开展领域建模。然后，根据上述模型，给出建议的数据表以及主要字段，特别是主键和外键。"><a href="#1-使用类图，分别对-Asg-RH-文档中-Make-Reservation-用例以及-Payment-用例开展领域建模。然后，根据上述模型，给出建议的数据表以及主要字段，特别是主键和外键。" class="headerlink" title="1. 使用类图，分别对 Asg_RH 文档中 Make Reservation 用例以及 Payment 用例开展领域建模。然后，根据上述模型，给出建议的数据表以及主要字段，特别是主键和外键。"></a>1. 使用类图，分别对 <a href="https://sysu-swsad.github.io/swad-guide/material/Asg_RH.pdf" target="_blank" rel="noopener">Asg_RH</a> 文档中 Make Reservation 用例以及 Payment 用例开展领域建模。然后，根据上述模型，给出建议的数据表以及主要字段，特别是主键和外键。</h2>
+          <!--noindex-->
           
-            <h1 id="Homework"><a href="#Homework" class="headerlink" title="Homework"></a>Homework</h1><h2 id="1-使用类图，分别对-Asg-RH-文档中-Make-Reservation-用例以及-Payment-用例开展领域建模。然后，根据上述模型，给出建议的数据表以及主要字段，特别是主键和外键。"><a href="#1-使用类图，分别对-Asg-RH-文档中-Make-Reservation-用例以及-Payment-用例开展领域建模。然后，根据上述模型，给出建议的数据表以及主要字段，特别是主键和外键。" class="headerlink" title="1. 使用类图，分别对 Asg_RH 文档中 Make Reservation 用例以及 Payment 用例开展领域建模。然后，根据上述模型，给出建议的数据表以及主要字段，特别是主键和外键。"></a>1. 使用类图，分别对 <a href="https://sysu-swsad.github.io/swad-guide/material/Asg_RH.pdf" target="_blank" rel="noopener">Asg_RH</a> 文档中 Make Reservation 用例以及 Payment 用例开展领域建模。然后，根据上述模型，给出建议的数据表以及主要字段，特别是主键和外键。</h2><ul>
-<li>注意事项：<ul>
-<li>对象必须是名词、特别是技术名词、报表、描述类的处理；</li>
-<li>关联必须有多重性、部分有名称与导航方向</li>
-<li>属性要注意计算字段</li>
-</ul>
-</li>
-<li>数据建模，为了简化描述仅需要给出表清单，例如：<ul>
-<li>Hotel（ID/Key，Name，LoctionID/Fkey，Address…..）</li>
-</ul>
-</li>
-</ul>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="1-Make-Reservation用例"><a href="#1-Make-Reservation用例" class="headerlink" title="1. Make Reservation用例"></a>1. Make Reservation用例</h3><img src="/2019/06/15/swsad-hw7/reservation.png" class="swsad-hw7">
-<p>数据表与主要字段</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">Customer</span><span class="params">(ID/key, FullName, EmailAdress)</span></span></span><br><span class="line"><span class="function"><span class="title">Location</span><span class="params">(ID/key, Name)</span></span></span><br><span class="line"><span class="function"><span class="title">Hotel</span><span class="params">(ID/key, Name, Adress, LocationID/Fkey)</span></span></span><br><span class="line"><span class="function"><span class="title">Reservation</span><span class="params">(ID/key, HotelID/Fkey, CustomerID/Fkey, BasketID/Fkey, check-in-date, num-of-night, check-out-date,...)</span></span></span><br><span class="line"><span class="function"><span class="title">RoomItem</span><span class="params">(ID/key, HotelID/Fkey, Children, AgeFrom, AgeTo)</span></span></span><br><span class="line"><span class="function"><span class="title">Room</span><span class="params">(ID/key, AvailableNum, ReservedNum, DescID/Fkey)</span></span></span><br><span class="line"><span class="function"><span class="title">RoomDesc</span><span class="params">(ID/key, list-price, info, RoomTypeID/Fkey)</span></span></span><br><span class="line"><span class="function"><span class="title">RoomType</span><span class="params">(ID/key, name)</span></span></span><br></pre></td></tr></table></figure>
-<h3 id="2-payment用例"><a href="#2-payment用例" class="headerlink" title="2. payment用例"></a>2. payment用例</h3><img src="/2019/06/15/swsad-hw7/payment.png" class="swsad-hw7">
-<p>数据表与主要字段</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">Payment</span><span class="params">(ID/key, price, reserationID/Fkey, CreditCardID/Fkey)</span></span></span><br><span class="line"><span class="function"><span class="title">CreditCard</span><span class="params">(ID/key, type, CardNumber, CardSercurityCode, HolderAddrID/Fkey)</span></span></span><br><span class="line"><span class="function"><span class="title">HolderAddr</span><span class="params">(ID/key, type, title, FirstName,Last Name,...)</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="2-使用-UML-State-Model，对每个订单对象生命周期建模"><a href="#2-使用-UML-State-Model，对每个订单对象生命周期建模" class="headerlink" title="2. 使用 UML State Model，对每个订单对象生命周期建模"></a>2. 使用 UML State Model，对每个订单对象生命周期建模</h2><ul>
-<li>建模对象： 参考 <a href="https://sysu-swsad.github.io/swad-guide/material/Asg_RH.pdf" target="_blank" rel="noopener">Asg_RH</a> 文档,对Reservation/Order 对象建模。</li>
-<li>建模要求： 参考练习不能提供足够信息帮助你对订单对象建模，请参考现在定旅馆的旅游网站，尽可能分析围绕订单发生的各种情况，直到订单通过销售事件（柜台销售）结束订单。</li>
-</ul>
-<p>##Solution</p>
-<h3 id="对订单生命周期建模"><a href="#对订单生命周期建模" class="headerlink" title="对订单生命周期建模"></a>对订单生命周期建模</h3><p>还要加上个标题，而且一定要有开始状态和结束状态。</p>
-<img src="/2019/06/15/swsad-hw7/order.png" class="swsad-hw7">
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/06/15/swsad-hw7/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
     </div>

@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.captainp.cn/2019/06/15/swsad-hw7/</loc>
+    
+    <lastmod>2019-07-09T04:34:54.049Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.captainp.cn/2019/06/01/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95Assignment6/</loc>
     
     <lastmod>2019-07-09T03:07:00.812Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>http://blog.captainp.cn/2019/05/23/pytest/</loc>
     
     <lastmod>2019-06-24T09:08:25.610Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.captainp.cn/2019/06/15/swsad-hw7/</loc>
-    
-    <lastmod>2019-06-24T08:53:54.584Z</lastmod>
     
   </url>
   
