@@ -1,3 +1,10 @@
+http://blog.captainp.cn/2019/09/03/vue-route/
+http://blog.captainp.cn/2019/09/03/vue-life-cycle/
+http://blog.captainp.cn/2019/08/22/axios-get/
+http://blog.captainp.cn/2019/08/16/js-array/
+http://blog.captainp.cn/2019/08/16/vue-vfor2/
+http://blog.captainp.cn/2019/08/02/vue-vfor/
+http://blog.captainp.cn/2019/08/02/wirte-blog/
 http://blog.captainp.cn/2019/06/15/swsad-hw7/
 http://blog.captainp.cn/2019/06/12/stmt-assign8/
 http://blog.captainp.cn/2019/06/11/stmt-assign7/

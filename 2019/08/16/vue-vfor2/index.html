@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="前一篇碰到了数组不能动态添加的问题，我用博客记录的办法以为解决了问题。结果还是我没搞懂原因，现在做验证的时候，又遇到各种各样的问题，我才发现我错的原因。 再次描述下需求：点击添加，然后弹出一个Modal，Modal包含一个From表单。点击下面的添加按钮，能动态添加。">
+<meta name="keywords" content="Vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iview vue-v-for 数组不能动态添加！真正原因Solved">
+<meta property="og:url" content="http://blog.captainp.cn/2019/08/16/vue-vfor2/index.html">
+<meta property="og:site_name" content="PJONE">
+<meta property="og:description" content="前一篇碰到了数组不能动态添加的问题，我用博客记录的办法以为解决了问题。结果还是我没搞懂原因，现在做验证的时候，又遇到各种各样的问题，我才发现我错的原因。 再次描述下需求：点击添加，然后弹出一个Modal，Modal包含一个From表单。点击下面的添加按钮，能动态添加。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://blog.captainp.cn/2019/08/16/vue-vfor2/add.png">
+<meta property="og:image" content="http://blog.captainp.cn/2019/08/16/vue-vfor2/add2.png">
+<meta property="og:image" content="http://blog.captainp.cn/2019/08/16/vue-vfor2/object.png">
+<meta property="og:image" content="http://blog.captainp.cn/2019/08/16/vue-vfor2/array.png">
+<meta property="og:image" content="http://blog.captainp.cn/2019/08/16/vue-vfor2/addName.png">
+<meta property="og:image" content="http://blog.captainp.cn/2019/08/16/vue-vfor2/empty.png">
+<meta property="og:updated_time" content="2019-08-27T11:17:11.432Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iview vue-v-for 数组不能动态添加！真正原因Solved">
+<meta name="twitter:description" content="前一篇碰到了数组不能动态添加的问题，我用博客记录的办法以为解决了问题。结果还是我没搞懂原因，现在做验证的时候，又遇到各种各样的问题，我才发现我错的原因。 再次描述下需求：点击添加，然后弹出一个Modal，Modal包含一个From表单。点击下面的添加按钮，能动态添加。">
+<meta name="twitter:image" content="http://blog.captainp.cn/2019/08/16/vue-vfor2/add.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://blog.captainp.cn/2019/08/16/vue-vfor2/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>iview vue-v-for 数组不能动态添加！真正原因Solved | PJONE</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PJONE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">PJ博客</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-navigation">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/navigation/" rel="section"><i class="menu-item-icon fa fa-fw fa-compass"></i> <br>导航</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.captainp.cn/2019/08/16/vue-vfor2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="PJONE">
+      <meta itemprop="description" content="PJONE的博客">
+      <meta itemprop="image" content="/images/captain.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PJONE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iview vue-v-for 数组不能动态添加！真正原因Solved
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-16 16:11:50" itemprop="dateCreated datePublished" datetime="2019-08-16T16:11:50+08:00">2019-08-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-27 19:17:11" itemprop="dateModified" datetime="2019-08-27T19:17:11+08:00">2019-08-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">7.4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">7 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前一篇碰到了<a href="https://blog.captainp.cn/2019/08/02/vue-vfor/">数组不能动态添加</a>的问题，我用博客记录的办法以为解决了问题。结果还是我没搞懂原因，现在做验证的时候，又遇到各种各样的问题，我才发现我错的原因。</p>
+<p>再次描述下需求：点击添加，然后弹出一个Modal，Modal包含一个From表单。点击下面的添加按钮，能动态添加。</p>
+<img src="/2019/08/16/vue-vfor2/add.png">
+<img src="/2019/08/16/vue-vfor2/add2.png">
+<a id="more"></a>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>整个表单绑定一个对象itemAddForm, itemAddForm除了上面的必填项外，还有一个otherType的数组，用来绑定下面特殊运动。<br>因为还有个详情功能，所以用的同一个Modal，当isAdd是true时，表示添加，isAdd是false时，表示编辑。</p>
+<p>vue代码如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">&lt;Modal v-model=<span class="string">"isOpen"</span> @on-cancel=<span class="string">"cancelItemAddModal"</span> :title=<span class="string">"isAdd ? '添加用户运动记录' : '用户运动记录'"</span> width=<span class="string">"500"</span>&gt;</span><br><span class="line">  &lt;Form :model=<span class="string">"itemAddForm"</span> ref=<span class="string">"itemAddForm"</span> :rules=<span class="string">"rules"</span> :label-width=<span class="string">"100"</span>&gt;</span><br><span class="line">    &lt;Card&gt;</span><br><span class="line">      &lt;p slot=<span class="string">"title"</span>&gt;基础运动&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">      &lt;FormItem v-if="isOpen &amp;&amp; isAdd" label="姓名：" prop="userId"&gt;</span></span><br><span class="line"><span class="regexp">        &lt;userSelect userType="user" @on-change="changeUserId"&gt; &lt;/u</span>serSelect&gt;</span><br><span class="line">      &lt;<span class="regexp">/FormItem&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">      &lt;FormItem v-if="isOpen &amp;&amp; !isAdd" label="姓名："&gt;</span></span><br><span class="line"><span class="regexp">        &lt;p style="width: 250px"&gt; &#123;&#123;itemAddForm.userName&#125;&#125; &lt;/</span>p&gt;</span><br><span class="line">      &lt;<span class="regexp">/FormItem&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">      &lt;FormItem label="记录日期：" prop="recordDate"&gt;</span></span><br><span class="line"><span class="regexp">        &lt;DatePicker</span></span><br><span class="line"><span class="regexp">          v-if="isAdd"</span></span><br><span class="line"><span class="regexp">          v-model="itemAddForm.recordDate"</span></span><br><span class="line"><span class="regexp">          type="date"</span></span><br><span class="line"><span class="regexp">          format="yyyy-MM-dd"</span></span><br><span class="line"><span class="regexp">          placeholder="请选择日期"</span></span><br><span class="line"><span class="regexp">          style="width: 250px"&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>DatePicker&gt;</span><br><span class="line">        &lt;p v-<span class="keyword">else</span> style=<span class="string">"width: 250px"</span>&gt; &#123;&#123;itemAddForm.recordDate&#125;&#125; &lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>FormItem&gt;</span><br><span class="line"></span><br><span class="line">      &lt;FormItem label=<span class="string">"运动手环："</span> prop=<span class="string">"walkStep"</span>&gt;</span><br><span class="line">        &lt;Input number v-<span class="keyword">if</span>=<span class="string">"isAdd"</span> v-model=<span class="string">"itemAddForm.walkStep"</span> placeholder=<span class="string">"请填写运动步数"</span> style=<span class="string">"width: 250px"</span>&gt;</span><br><span class="line">          &lt;span slot=<span class="string">"append"</span>&gt;步数&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>Input&gt;</span><br><span class="line">        &lt;p v-<span class="keyword">else</span> style=<span class="string">"width: 250px"</span>&gt; &#123;&#123;itemAddForm.walkStep&#125;&#125; 步 &lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>FormItem&gt;</span><br><span class="line">      &lt;FormItem label=<span class="string">"消耗能量："</span> prop=<span class="string">"walkEnergy"</span>&gt;</span><br><span class="line">        &lt;Input number v-<span class="keyword">if</span>=<span class="string">"isAdd"</span> v-model=<span class="string">"itemAddForm.walkEnergy"</span> placeholder=<span class="string">"请填写消耗能量"</span> style=<span class="string">"width: 250px"</span>&gt;</span><br><span class="line">          &lt;span slot=<span class="string">"append"</span>&gt;千卡路里&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>Input&gt;</span><br><span class="line">        &lt;p v-<span class="keyword">else</span> style=<span class="string">"width: 250px"</span>&gt; &#123;&#123;itemAddForm.walkEnergy&#125;&#125; 千卡路里 &lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>FormItem&gt;</span><br><span class="line"></span><br><span class="line">      &lt;FormItem label=<span class="string">"跳绳app："</span> prop=<span class="string">"ropeSkippingTime"</span>&gt;</span><br><span class="line">        &lt;Input number v-<span class="keyword">if</span>=<span class="string">"isAdd"</span> v-model=<span class="string">"itemAddForm.ropeSkippingTime"</span> placeholder=<span class="string">"请填写跳绳次数"</span> style=<span class="string">"width: 250px"</span>&gt;</span><br><span class="line">          &lt;span slot=<span class="string">"append"</span>&gt;次数  &lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>Input&gt;</span><br><span class="line">        &lt;p v-<span class="keyword">else</span> style=<span class="string">"width: 250px"</span>&gt; &#123;&#123;itemAddForm.ropeSkippingTime&#125;&#125; 次 &lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>FormItem&gt;</span><br><span class="line"></span><br><span class="line">      &lt;FormItem label=<span class="string">"消耗能量："</span> prop=<span class="string">"ropeSkippingEnergy"</span>&gt;</span><br><span class="line">        &lt;Input number v-<span class="keyword">if</span>=<span class="string">"isAdd"</span> v-model=<span class="string">"itemAddForm.ropeSkippingEnergy"</span> placeholder=<span class="string">"请填写消耗能量"</span> style=<span class="string">"width: 250px"</span>&gt;</span><br><span class="line">          &lt;span slot=<span class="string">"append"</span>&gt;千卡路里&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>Input&gt;</span><br><span class="line">        &lt;p v-<span class="keyword">else</span> style=<span class="string">"width: 250px"</span>&gt; &#123;&#123;itemAddForm.ropeSkippingEnergy&#125;&#125; 千卡路里 &lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>FormItem&gt;</span><br><span class="line">    &lt;<span class="regexp">/Card&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    &lt;Card v-for="(item,index) in itemAddForm.otherType"  :key="index" style="margin-top: 10px"&gt;</span></span><br><span class="line"><span class="regexp">    &lt;p slot="title"&gt;特殊运动 &#123;&#123;index + 1&#125;&#125;&lt;/</span>p&gt;</span><br><span class="line">      &lt;Button v-<span class="keyword">if</span>=<span class="string">"isAdd"</span> slot=<span class="string">"extra"</span> @click=<span class="string">"deleteOtherType(index)"</span> type=<span class="string">'error'</span>&gt;</span><br><span class="line">        删除</span><br><span class="line">      &lt;<span class="regexp">/Button&gt;</span></span><br><span class="line"><span class="regexp">      &lt;FormItem label="运动类型：" :prop="'otherType.' + index + '.type'" :rules="&#123;required: true, message: '运动类型不能为空'&#125;"&gt;</span></span><br><span class="line"><span class="regexp">        &lt;Input v-if="isAdd" clearable v-model="item.type" placeholder="请填写运动类型" style="width: 250px"/</span>&gt;</span><br><span class="line">        &lt;p v-<span class="keyword">else</span> style=<span class="string">"width: 250px"</span>&gt; &#123;&#123;item.type&#125;&#125; &lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>FormItem&gt;</span><br><span class="line"></span><br><span class="line">      &lt;FormItem label=<span class="string">"运动时间："</span> :prop=<span class="string">"'otherType.' + index + '.time'"</span> :rules=<span class="string">"&#123;required: true, message: '运动时间不能为空'&#125;"</span>&gt;</span><br><span class="line">        &lt;Time-picker v-<span class="keyword">if</span>=<span class="string">"isAdd"</span> v-model=<span class="string">"item.time"</span> format=<span class="string">"HH:mm:ss"</span> placeholder=<span class="string">"选择时间"</span> style=<span class="string">"width: 250px"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Time-picker</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-else</span> <span class="attr">style</span>=<span class="string">"width: 250px"</span>&gt;</span> &#123;&#123;item.time&#125;&#125;  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">FormItem</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">      &lt;FormItem label=<span class="string">"运动时长："</span> :prop=<span class="string">"'otherType.' + index + '.lasting'"</span> :rules=<span class="string">"&#123;required: true, message: '运动时长不能为空'&#125;"</span>&gt;</span><br><span class="line">        &lt;Input v-<span class="keyword">if</span>=<span class="string">"isAdd"</span> clearable v-model=<span class="string">"item.lasting"</span> placeholder=<span class="string">"请填写运动时长"</span> style=<span class="string">"width: 250px"</span>&gt;</span><br><span class="line">          &lt;span slot=<span class="string">"append"</span>&gt;分钟&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>Input&gt;</span><br><span class="line">        &lt;p v-<span class="keyword">else</span> style=<span class="string">"width: 250px"</span>&gt; &#123;&#123;item.lasting&#125;&#125; 分钟 &lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>FormItem&gt;</span><br><span class="line">    &lt;<span class="regexp">/Card&gt;</span></span><br><span class="line"><span class="regexp">    &lt;Button v-if="isAdd" style="margin-top: 10px" @click="addOtherType" type="primary"&gt; 添加特殊运动&lt;/</span>Button&gt;</span><br><span class="line">  &lt;<span class="regexp">/Form&gt;</span></span><br><span class="line"><span class="regexp">  &lt;!--自定义页脚--&gt;</span></span><br><span class="line"><span class="regexp">  &lt;div slot="footer"&gt;</span></span><br><span class="line"><span class="regexp">    &lt;Button v-if="isAdd" type="text" @click="cancelItemAddModal"&gt;取消&lt;/</span>Button&gt;</span><br><span class="line">    &lt;Button type=<span class="string">"primary"</span> @click=<span class="string">"addItem('itemAddForm')"</span> &gt;确认&lt;<span class="regexp">/Button&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/Modal&gt;</span></span><br></pre></td></tr></table></figure>
+<p>添加特殊运动按钮的函数如下。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">addOtherType() &#123;</span><br><span class="line">  <span class="keyword">this</span>.itemAddForm.otherType.push(&#123;&#125;)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>这么写肯定是没有问题的，因为官网的示例就是类似的。但问题出在哪呢？</p>
+<p>之前没有想到，是打开Modal时的锅。</p>
+<p>点击左上角的添加按钮时，执行的函数如下。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用户添加modal打开</span></span><br><span class="line">openItemAddModal () &#123;</span><br><span class="line">  <span class="keyword">this</span>.itemAddForm = &#123;&#125;</span><br><span class="line">  <span class="keyword">this</span>.$refs.itemAddForm.resetFields()</span><br><span class="line">  <span class="keyword">this</span>.isAdd = <span class="literal">true</span></span><br><span class="line">  <span class="keyword">this</span>.isOpen = <span class="literal">true</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>这一看，好像没有问题啊。</p>
+<p>然而其实是少了一句话。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用户添加modal打开</span></span><br><span class="line">openItemAddModal () &#123;</span><br><span class="line">  <span class="keyword">this</span>.itemAddForm = &#123;&#125;</span><br><span class="line">  <span class="keyword">this</span>.$<span class="keyword">set</span>(this.itemAddForm, 'otherType', [])</span><br><span class="line">  this.$refs.itemAddForm.resetFields()</span><br><span class="line">  this.isAdd = true</span><br><span class="line">  this.isOpen = true</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>官网的这个<a href="https://cn.vuejs.org/v2/guide/list.html#%E5%AF%B9%E8%B1%A1%E5%8F%98%E6%9B%B4%E6%A3%80%E6%B5%8B%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9" target="_blank" rel="noopener">对象变更注意事项</a>我已经看了很多次，还是栽在这里。</p>
+<img src="/2019/08/16/vue-vfor2/object.png">
+<p>前面我已经看到数组的注意事项，所以使用push。然而这个数组是在一个对象里面，这个我忽略了。</p>
+<img src="/2019/08/16/vue-vfor2/array.png">
+<h2 id="动态验证表单"><a href="#动态验证表单" class="headerlink" title="动态验证表单"></a>动态验证表单</h2><p>虽说将otherType这个数组分离出来也能行，但是使用iview动态验证行不通。首先它不是一个对象，不能绑定Form。其次，如果使用自定义验证的话，得不到输入的值，就是说，不能知道特殊运动中到底第几项出的问题。</p>
+<p>而这里，只要动态设定prop，就能动态验证了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;FormItem label=<span class="string">"运动类型："</span> :prop=<span class="string">"'otherType.' + index + '.type'"</span> :rules=<span class="string">"&#123;required: true, message: '运动类型不能为空'&#125;"</span>&gt;</span><br><span class="line">  &lt;Input v-<span class="keyword">if</span>=<span class="string">"isAdd"</span> clearable v-model=<span class="string">"item.type"</span> placeholder=<span class="string">"请填写运动类型"</span> style=<span class="string">"width: 250px"</span>/&gt;</span><br><span class="line">  &lt;p v-<span class="keyword">else</span> style=<span class="string">"width: 250px"</span>&gt; &#123;&#123;item.type&#125;&#125; &lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>FormItem&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="举一反三"><a href="#举一反三" class="headerlink" title="举一反三"></a>举一反三</h2><p>同样，这里也解决了一个bug。添加姓名这个组件是我自己定义的，名字是userSelect。输入名字，然后远程搜索返回选项，当点击了选项时，会触发on-change函数，然后记录id。因为必须保证添加的姓名是存在的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;FormItem v-<span class="keyword">if</span>=<span class="string">"isOpen &amp;&amp; isAdd"</span> label=<span class="string">"姓名："</span> prop=<span class="string">"userId"</span>&gt;</span><br><span class="line">  &lt;userSelect userType=<span class="string">"user"</span> @on-change=<span class="string">"changeUserId"</span>&gt; <span class="xml"><span class="tag">&lt;/<span class="name">userSelect</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/FormItem&gt;</span></span><br></pre></td></tr></table></figure>
+<img src="/2019/08/16/vue-vfor2/addName.png">
+<p>当然，这一项不能为空。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rules: &#123;</span><br><span class="line">  userId: [</span><br><span class="line">    &#123; <span class="attr">required</span>: <span class="literal">true</span>, <span class="attr">message</span>: <span class="string">'用户姓名不能为空'</span> &#125;</span><br><span class="line">  ]...</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>本来这样没有问题，选了就能提交。但是后来发现一个bug，一开始先不选，直接提交，这样就提示为空。</p>
+<img src="/2019/08/16/vue-vfor2/empty.png">
+<p>然而，我再选的时候，这个提示不能消失，一直不能提交。</p>
+<p>这个问题也是类似。之前我是这么写的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">changeUserId: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.itemAddForm.userId = e</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>应该要这么写。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">changeUserId: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.$<span class="keyword">set</span>(this.itemAddForm, 'userId', e)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>同样，打开详情的时候，要赋值，也是类似的道理。</p>
+<p>不要这样写：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">openItemEditModel (itemInfo) &#123;</span><br><span class="line">  <span class="comment">// 后面的属性会覆盖前面的属性</span></span><br><span class="line">  <span class="keyword">this</span>.itemAddForm = itemInfo</span><br><span class="line">  <span class="keyword">this</span>.isAdd = <span class="literal">false</span></span><br><span class="line">  <span class="keyword">this</span>.isOpen = <span class="literal">true</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>也不要这么写:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">openItemEditModel (itemInfo) &#123;</span><br><span class="line">  <span class="comment">// 后面的属性会覆盖前面的属性</span></span><br><span class="line">  <span class="keyword">this</span>.itemAddForm = &#123;&#125;</span><br><span class="line">  <span class="built_in">Object</span>.assign(<span class="keyword">this</span>.itemAddForm, itemInfo)</span><br><span class="line">  <span class="keyword">this</span>.isAdd = <span class="literal">false</span></span><br><span class="line">  <span class="keyword">this</span>.isOpen = <span class="literal">true</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>而是要这么写。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">openItemEditModel (itemInfo) &#123;</span><br><span class="line">  <span class="comment">// 后面的属性会覆盖前面的属性</span></span><br><span class="line">  <span class="keyword">this</span>.itemAddForm = <span class="built_in">Object</span>.assign(&#123;&#125;, itemInfo)</span><br><span class="line">  <span class="keyword">this</span>.isAdd = <span class="literal">false</span></span><br><span class="line">  <span class="keyword">this</span>.isOpen = <span class="literal">true</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>该注意的还是要注意，直接修改有时候是可行，但是做着做着，就会有很多奇奇怪怪的bug让你疯狂。你上一秒还好好的，下一秒就不行了。绑定数组和对象这个东西要引起足够的重视才行。这影响的不仅仅是数据的展示，还有其他的各种绑定，如rules验证，表格的绑定等等，明明是有东西，但就是传不过来。就是这个问题</p>
+
+      
+    </div>
+
+    
+      
+
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\2019\08\22\axios-get\" rel="bookmark">axios的GET方法无法传递中括号</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\2019\09\03\vue-life-cycle\" rel="bookmark">Vue生命周期相关问题</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\2019\08\02\vue-vfor\" rel="bookmark">vue-v-for 数组不能动态添加</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\2019\09\03\vue-route\" rel="bookmark">Vue router</a></div>
+      
+    </li>
+  
+  </ul>
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>PJONE</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="http://blog.captainp.cn/2019/08/16/vue-vfor2/" title="iview vue-v-for 数组不能动态添加！真正原因Solved">http://blog.captainp.cn/2019/08/16/vue-vfor2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Vue/" rel="tag"># Vue</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/02/vue-vfor/" rel="next" title="vue-v-for 数组不能动态添加">
+                <i class="fa fa-chevron-left"></i> vue-v-for 数组不能动态添加
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/16/js-array/" rel="prev" title="JS数组的一些常规用法">
+                JS数组的一些常规用法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/captain.jpg" alt="PJONE">
+            
+              <p class="site-author-name" itemprop="name">PJONE</p>
+              <div class="site-description motion-element" itemprop="description">PJONE的博客</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/pjsfirst" title="GitHub &rarr; https://github.com/pjsfirst" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:903794757@qq.com" title="QQ邮箱 &rarr; mailto:903794757@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>QQ邮箱</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/pjsfirstlaw" title="CSDN &rarr; https://blog.csdn.net/pjsfirstlaw" rel="noopener" target="_blank"><i class="fa fa-fw fa-copyright"></i>CSDN</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://gitee.com/panjianone/projects" title="码云 &rarr; https://gitee.com/panjianone/projects" rel="noopener" target="_blank"><i class="fa fa-fw fa-google"></i>码云</a>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+              
+                
+              
+              
+              
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构"><span class="nav-text">数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案"><span class="nav-text">解决方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态验证表单"><span class="nav-text">动态验证表单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#举一反三"><span class="nav-text">举一反三</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PJONE</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">111k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">1:41</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
