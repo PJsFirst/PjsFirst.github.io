@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.captainp.cn/2019/08/16/js-array/</loc>
+    
+    <lastmod>2019-09-11T10:45:03.156Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.captainp.cn/2019/09/03/vue-route/</loc>
     
-    <lastmod>2019-09-03T05:15:44.286Z</lastmod>
+    <lastmod>2019-09-09T02:58:14.787Z</lastmod>
     
   </url>
   
@@ -26,13 +33,6 @@
     <loc>http://blog.captainp.cn/2019/08/02/vue-vfor/</loc>
     
     <lastmod>2019-08-27T11:17:11.377Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.captainp.cn/2019/08/16/js-array/</loc>
-    
-    <lastmod>2019-08-27T11:17:11.376Z</lastmod>
     
   </url>
   

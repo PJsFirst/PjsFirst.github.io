@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="PJONE">
 <meta property="og:description" content="1.mvvm 框架是什么？Modal-View-ViewModel的缩写（模型-视图-视图模型）。模型指的是后端传递的数据。视图指的是所看到的页面。视图模型mvvm模式的核心，它是连接view和model的桥梁。它有两个方向：一是将模型转化成视图，即将后端传递的数据转化成所看到的页面。实现的方式是：数据绑定。二是将视图转化成模型，即将所看到的页面转化成后端的数据。实现的方式是：DOM 事件监听。这">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-03T05:15:44.286Z">
+<meta property="og:updated_time" content="2019-09-09T02:58:14.787Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue router">
 <meta name="twitter:description" content="1.mvvm 框架是什么？Modal-View-ViewModel的缩写（模型-视图-视图模型）。模型指的是后端传递的数据。视图指的是所看到的页面。视图模型mvvm模式的核心，它是连接view和model的桥梁。它有两个方向：一是将模型转化成视图，即将后端传递的数据转化成所看到的页面。实现的方式是：数据绑定。二是将视图转化成模型，即将所看到的页面转化成后端的数据。实现的方式是：DOM 事件监听。这">
@@ -406,12 +406,24 @@
                 
               
 
-              <time title="创建时间：2019-09-03 11:24:55 / 修改时间：13:15:44" itemprop="dateCreated datePublished" datetime="2019-09-03T11:24:55+08:00">2019-09-03</time>
+              <time title="创建时间：2019-09-03 11:24:55" itemprop="dateCreated datePublished" datetime="2019-09-03T11:24:55+08:00">2019-09-03</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-09-09 10:58:14" itemprop="dateModified" datetime="2019-09-09T10:58:14+08:00">2019-09-09</time>
               
             
           </span>
@@ -518,7 +530,7 @@
 <li>触发 DOM 更新。</li>
 <li>用创建好的实例调用 <strong>beforeRouteEnter</strong> 守卫中传给 <strong>next</strong> 的回调函数。</li>
 </ol>
-<h1 id="6-route-和-router-的区别"><a href="#6-route-和-router-的区别" class="headerlink" title="6.$route 和 $router 的区别"></a>6.$route 和 $router 的区别</h1><p>$route是“路由信息对象”，包括path，params，hash，query，fullPath，matched，name等路由信息参数。而$router是“路由实例”对象包括了路由的跳转方法，钩子函数等。</p>
+<h1 id="6-route-和-router-的区别"><a href="#6-route-和-router-的区别" class="headerlink" title="6.\$route 和 \$router 的区别"></a>6.\$route 和 \$router 的区别</h1><p>\$route是“路由信息对象”，包括path，params，hash，query，fullPath，matched，name等路由信息参数。而\$router是“路由实例”对象包括了路由的跳转方法，钩子函数等。</p>
 <h1 id="7-vue-router响应路由参数的变化"><a href="#7-vue-router响应路由参数的变化" class="headerlink" title="7.vue-router响应路由参数的变化"></a>7.vue-router响应路由参数的变化</h1><p>复用组件时，想对路由参数的变化作出响应的话，你可以简单地 watch (监测变化) $route 对象<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> User = &#123;</span><br><span class="line">  template: <span class="string">'...'</span>,</span><br><span class="line">  watch: &#123;</span><br><span class="line">    <span class="string">'$route'</span> (to, <span class="keyword">from</span>) &#123;</span><br><span class="line">      <span class="comment">// 对路由变化作出响应...</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h1 id="8-vue-router传参"><a href="#8-vue-router传参" class="headerlink" title="8.vue-router传参"></a>8.vue-router传参</h1><p>在 router 目录下的 index.js 文件中，对 path 属性加上 /:id，使用 router 对象的 params.id 获取</p>
 <h1 id="9-vue-router的两种模式"><a href="#9-vue-router的两种模式" class="headerlink" title="9.vue-router的两种模式"></a>9.vue-router的两种模式</h1><p>History 与 Hash。<br>hash 就是指 url 尾巴后的 # 号以及后面的字符。通过window.location.hash获取hash值</p>
@@ -543,14 +555,14 @@
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="\2019\09\03\vue-life-cycle\" rel="bookmark">Vue生命周期相关问题</a></div>
+      <div class="popular-posts-title"><a href="\2019\08\02\vue-vfor\" rel="bookmark">vue-v-for 数组不能动态添加</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="\2019\08\02\vue-vfor\" rel="bookmark">vue-v-for 数组不能动态添加</a></div>
+      <div class="popular-posts-title"><a href="\2019\09\03\vue-life-cycle\" rel="bookmark">Vue生命周期相关问题</a></div>
       
     </li>
   
@@ -883,7 +895,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-mvvm-框架是什么？"><span class="nav-text">1.mvvm 框架是什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-vue-router-是什么-它有哪些组件"><span class="nav-text">2.vue-router 是什么?它有哪些组件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-active-class-是哪个组件的属性？"><span class="nav-text">3.active-class 是哪个组件的属性？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-怎么定义-vue-router-的动态路由-怎么获取传过来的值"><span class="nav-text">4.怎么定义 vue-router 的动态路由? 怎么获取传过来的值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-vue-router-有哪几种导航钩子"><span class="nav-text">5.vue-router 有哪几种导航钩子?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-route-和-router-的区别"><span class="nav-text">6.$route 和 $router 的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-vue-router响应路由参数的变化"><span class="nav-text">7.vue-router响应路由参数的变化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-vue-router传参"><span class="nav-text">8.vue-router传参</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-vue-router的两种模式"><span class="nav-text">9.vue-router的两种模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-vue-router实现路由懒加载（-动态加载路由-）"><span class="nav-text">10.vue-router实现路由懒加载（ 动态加载路由 ）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-mvvm-框架是什么？"><span class="nav-text">1.mvvm 框架是什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-vue-router-是什么-它有哪些组件"><span class="nav-text">2.vue-router 是什么?它有哪些组件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-active-class-是哪个组件的属性？"><span class="nav-text">3.active-class 是哪个组件的属性？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-怎么定义-vue-router-的动态路由-怎么获取传过来的值"><span class="nav-text">4.怎么定义 vue-router 的动态路由? 怎么获取传过来的值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-vue-router-有哪几种导航钩子"><span class="nav-text">5.vue-router 有哪几种导航钩子?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-route-和-router-的区别"><span class="nav-text">6.\$route 和 \$router 的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-vue-router响应路由参数的变化"><span class="nav-text">7.vue-router响应路由参数的变化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-vue-router传参"><span class="nav-text">8.vue-router传参</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-vue-router的两种模式"><span class="nav-text">9.vue-router的两种模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-vue-router实现路由懒加载（-动态加载路由-）"><span class="nav-text">10.vue-router实现路由懒加载（ 动态加载路由 ）</span></a></li></ol></div>
             
 
           </div>
@@ -918,7 +930,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">111k</span>
+    <span title="站点总字数">112k</span>
   
 
   
@@ -929,7 +941,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">1:41</span>
+    <span title="站点阅读时长">1:42</span>
   
 </div>
 

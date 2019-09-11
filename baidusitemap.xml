@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://blog.captainp.cn/2019/08/16/js-array/</loc>
+    <lastmod>2019-09-11</lastmod>
+  </url>  <url>
     <loc>http://blog.captainp.cn/2019/09/03/vue-route/</loc>
-    <lastmod>2019-09-03</lastmod>
+    <lastmod>2019-09-09</lastmod>
   </url>  <url>
     <loc>http://blog.captainp.cn/2019/09/03/vue-life-cycle/</loc>
     <lastmod>2019-09-03</lastmod>
@@ -11,9 +14,6 @@
     <lastmod>2019-08-27</lastmod>
   </url>  <url>
     <loc>http://blog.captainp.cn/2019/08/02/vue-vfor/</loc>
-    <lastmod>2019-08-27</lastmod>
-  </url>  <url>
-    <loc>http://blog.captainp.cn/2019/08/16/js-array/</loc>
     <lastmod>2019-08-27</lastmod>
   </url>  <url>
     <loc>http://blog.captainp.cn/2019/08/22/axios-get/</loc>
