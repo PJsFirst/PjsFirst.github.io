@@ -1,3 +1,4 @@
+http://blog.captainp.cn/2019/09/16/js-array2/
 http://blog.captainp.cn/2019/09/03/vue-route/
 http://blog.captainp.cn/2019/09/03/vue-life-cycle/
 http://blog.captainp.cn/2019/08/22/axios-get/

@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="在ES6中，数组已经有很多好用的函数内置在Array.prototype中了。为了更好地理解这些函数，在这篇博客实现这些函数。直接修改原型是不好的习惯，因此是定义函数的形式来实现的。 也就是说，不要像下面这样写： 123Array.prototype.forEach = function forEach(callback) &amp;#123;    // 实现&amp;#125;; 而是这样写: 123func">
+<meta name="keywords" content="JS,array">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手动实现JS数组的方法">
+<meta property="og:url" content="http://blog.captainp.cn/2019/09/16/js-array2/index.html">
+<meta property="og:site_name" content="PJONE">
+<meta property="og:description" content="在ES6中，数组已经有很多好用的函数内置在Array.prototype中了。为了更好地理解这些函数，在这篇博客实现这些函数。直接修改原型是不好的习惯，因此是定义函数的形式来实现的。 也就是说，不要像下面这样写： 123Array.prototype.forEach = function forEach(callback) &amp;#123;    // 实现&amp;#125;; 而是这样写: 123func">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-17T05:57:00.013Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="手动实现JS数组的方法">
+<meta name="twitter:description" content="在ES6中，数组已经有很多好用的函数内置在Array.prototype中了。为了更好地理解这些函数，在这篇博客实现这些函数。直接修改原型是不好的习惯，因此是定义函数的形式来实现的。 也就是说，不要像下面这样写： 123Array.prototype.forEach = function forEach(callback) &amp;#123;    // 实现&amp;#125;; 而是这样写: 123func">
+
+
+
+
+
+
+  <link rel="canonical" href="http://blog.captainp.cn/2019/09/16/js-array2/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>手动实现JS数组的方法 | PJONE</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PJONE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">PJ博客</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-navigation">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/navigation/" rel="section"><i class="menu-item-icon fa fa-fw fa-compass"></i> <br>导航</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.captainp.cn/2019/09/16/js-array2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="PJONE">
+      <meta itemprop="description" content="PJONE的博客">
+      <meta itemprop="image" content="/images/captain.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PJONE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">手动实现JS数组的方法
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-16 12:27:01" itemprop="dateCreated datePublished" datetime="2019-09-16T12:27:01+08:00">2019-09-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-09-17 13:57:00" itemprop="dateModified" datetime="2019-09-17T13:57:00+08:00">2019-09-17</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JS/" itemprop="url" rel="index"><span itemprop="name">JS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">5.7k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">5 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在ES6中，数组已经有很多好用的函数内置在<strong>Array.prototype</strong>中了。为了更好地理解这些函数，在这篇博客实现这些函数。直接修改原型是不好的习惯，因此是定义函数的形式来实现的。</p>
+<p>也就是说，不要像下面这样写：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.prototype.forEach = <span class="function"><span class="keyword">function</span> <span class="title">forEach</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 实现</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>而是这样写:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">forEach</span> (<span class="params">array, callback</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 第一个参数是数组</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h1 id="数组元素增删改"><a href="#数组元素增删改" class="headerlink" title="数组元素增删改"></a>数组元素增删改</h1><h2 id="shift"><a href="#shift" class="headerlink" title=".shift"></a>.shift</h2><p>删除第一个元素，并且返回。这是修改原数组的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shift</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> firstValue = array[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">const</span> &#123;length&#125; = array</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; length; i++) &#123;</span><br><span class="line">        array[i - <span class="number">1</span>] = array[i]</span><br><span class="line">    &#125;</span><br><span class="line">    array.length = length - <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> firstValue</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="unshift"><a href="#unshift" class="headerlink" title=".unshift"></a>.unshift</h2><p>从头部添加一个或多个元素，并返回添加后数组的长度，这是修改原数组的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">unshift</span>(<span class="params">array, ...values</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> mergedArrays = concat(values, ...array) <span class="comment">//后面实现concat</span></span><br><span class="line">    <span class="keyword">const</span> &#123;<span class="attr">length</span>: mergedArrayLength&#125; = mergedArrays</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; mergedArrayLength; i++) &#123;</span><br><span class="line">        array[i] = mergedArrays[i]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> array.length</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="slice"><a href="#slice" class="headerlink" title=".slice"></a>.slice</h2><p>返回某一段的数组内容，不包含最后一个的坐标。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">slice</span>(<span class="params">array, startIndex, endIndex = array.length</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> result = []</span><br><span class="line">    <span class="keyword">if</span> (endIndex &gt; array.length) &#123;</span><br><span class="line">        endIndex = array.length</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = startIndex; i &lt; endIndex; i++) &#123;</span><br><span class="line">        push(result, array[i]) <span class="comment">// 后面实现push</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="splice"><a href="#splice" class="headerlink" title=".splice"></a>.splice</h2><p>可删可加，返回被删的条目数组。此方法会改变原数组。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用法</span></span><br><span class="line">arrayObject.splice(index,howmany,item1,.....,itemX)</span><br></pre></td></tr></table></figure></p>
+<p>index是插入或删除的开始位置，howmany是这个位置后面的几个（如果仅仅是增加，则设为0），后面的item是可选，在此位置插入的元素。函数返回删除的数组（如果存在的话）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="数组的合并、添加、逆转"><a href="#数组的合并、添加、逆转" class="headerlink" title="数组的合并、添加、逆转"></a>数组的合并、添加、逆转</h1><h2 id="concat"><a href="#concat" class="headerlink" title=".concat"></a>.concat</h2><p>合并数组，<strong>不改变原数组</strong>，返回新数组。其参数可以是<strong>值</strong>，也可以是<strong>数组</strong>。这个方法是浅复制。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">concat</span>(<span class="params">array, ...values</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> result = [...array]</span><br><span class="line">    <span class="keyword">const</span> &#123;length&#125; = values</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> value = values[i]</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">Array</span>.isArray(value)) &#123;</span><br><span class="line">            push(result, ...value)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            push(result, value)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="join"><a href="#join" class="headerlink" title=".join"></a>.join</h2><p>将数组里的内容，以某个字符串连接起来。这里使用reduce的方法来实现。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">join</span>(<span class="params">array, joinWith</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> reduce(array, </span><br><span class="line">    (result, current, index) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (index === <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> current</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;result&#125;</span><span class="subst">$&#123;joinWith&#125;</span><span class="subst">$&#123;current&#125;</span>`</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">''</span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="reverse"><a href="#reverse" class="headerlink" title=".reverse"></a>.reverse</h2><p>将数组的内容倒序，这个是改变原数组内容的</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h1><h2 id="forEach"><a href="#forEach" class="headerlink" title=".forEach"></a>.forEach</h2><p>最常用的函数之一，接收一个函数，这个函数的参数可以有三个：值，值的下标，数组本身。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">forEach</span> (<span class="params">array, callback</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;length&#125; = array</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> value = array[i]</span><br><span class="line">        callback(value, i, array)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个方法并没有返回值，因此返回的是undefined</p>
+<h2 id="map"><a href="#map" class="headerlink" title=".map"></a>.map</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">map</span> (<span class="params">array, callback</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> result = []</span><br><span class="line">    <span class="keyword">const</span> &#123;length&#125; = array</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> value = array[i]</span><br><span class="line">        result[index] = callback(value, i, array)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此方法会返回新数组，但<strong>不会修改原数组</strong>。</p>
+<h2 id="filter"><a href="#filter" class="headerlink" title=".filter"></a>.filter</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">filter</span> (<span class="params">array, callback</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> result = []</span><br><span class="line">    <span class="keyword">const</span> &#123;length&#125; = array</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> value = array[i]</span><br><span class="line">        <span class="keyword">if</span> (callback(value, i, array)) &#123;</span><br><span class="line">            result.push(value)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此方法会返回新数组，但<strong>不会修改原数组</strong>。</p>
+<h2 id="reduce"><a href="#reduce" class="headerlink" title=".reduce"></a>.reduce</h2><p>此方法接收两个参数，callback和initValue，callback可以有4个参数，acc, value, index, array，其中前2个是必需的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reduce</span> (<span class="params">array, callback, initValue</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;length&#125; = array</span><br><span class="line">    <span class="keyword">let</span> acc = initValue</span><br><span class="line">    <span class="keyword">let</span> startIndex = <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> (initValue == <span class="literal">undefined</span>) &#123;</span><br><span class="line">        acc = array[<span class="number">0</span>] <span class="comment">// 如果没定义，从第一个元素开始</span></span><br><span class="line">        startIndex = <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = startIndex; i &lt; length; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> value = array[i]</span><br><span class="line">        acc = callback(acc, value, i, array)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> acc</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h1><h2 id="findIndex"><a href="#findIndex" class="headerlink" title=".findIndex"></a>.findIndex</h2><p>当callback返回true时，此方法返回当前的索引，没有时，返回-1<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">findIndex</span>(<span class="params">array, callback</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;length&#125; = array</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; length; i++) [</span><br><span class="line">        <span class="keyword">const</span> value = array[i]</span><br><span class="line">        <span class="keyword">if</span> (callback(value, i, array)) &#123;</span><br><span class="line">            <span class="keyword">return</span> i</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="find"><a href="#find" class="headerlink" title=".find"></a>.find</h2><p>跟findIndex唯一的不同是，此方法返回值，而不是返回索引。这里可以复用一下findIndex的方法。没有的话，返回undefined。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">find</span>(<span class="params">array, callback</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> index = findIndex(array, callback)</span><br><span class="line">    <span class="keyword">if</span> (index === <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">undefined</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> array[index]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="indexOf"><a href="#indexOf" class="headerlink" title=".indexOf"></a>.indexOf</h2><p>这是另一种得到数组索引的方法，但它接收的参数不是函数，而是一个值。当这个值跟数组的某个值相同，才返回。同样可以利用findIndex</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">indexOf</span>(<span class="params">array, searchValue</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> findIndex(array, item =&gt; item === searchValue)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="lastIndexOf"><a href="#lastIndexOf" class="headerlink" title=".lastIndexOf"></a>.lastIndexOf</h2><p>这个跟indexOf差不多，但是返回的是最后的索引。从后面开始遍历就可以了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">lastIndexOf</span>(<span class="params">array, searchValue</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;length&#125; = array</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">const</span> value = array[i]</span><br><span class="line">        <span class="keyword">if</span> (value === searchValue) &#123;</span><br><span class="line">            <span class="keyword">return</span> i</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="every"><a href="#every" class="headerlink" title=".every"></a>.every</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">every</span> (<span class="params">array, callback</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">in</span> array) &#123;</span><br><span class="line">        <span class="keyword">const</span> value = array[i]</span><br><span class="line">        <span class="keyword">if</span> (!callback(value, i, array)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="some"><a href="#some" class="headerlink" title=".some"></a>.some</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">every</span> (<span class="params">array, callback</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">in</span> array) &#123;</span><br><span class="line">        <span class="keyword">const</span> value = array[i]</span><br><span class="line">        <span class="keyword">if</span> (callback(value, i, array)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="includes"><a href="#includes" class="headerlink" title=".includes"></a>.includes</h2><p>此方法跟some差不多，但接收一个值而不是函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">includes</span>(<span class="params">array, searchValue</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> some(array, value =&gt; value === searchValue)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="扁平化"><a href="#扁平化" class="headerlink" title="扁平化"></a>扁平化</h1><h2 id="flat"><a href="#flat" class="headerlink" title=".flat"></a>.flat</h2><p>用于减少数组的深度，可以接收一个参数，指定多少层的数组可被flattened，其余的数组保持原样。(0就是不变，默认为1，使用Infinity作为参数，则展开任意深度)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">flat</span>(<span class="params">array, depth = <span class="number">1</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (depth &lt; <span class="number">1</span> || !<span class="built_in">Array</span>.isArray(array)) &#123;</span><br><span class="line">        <span class="keyword">return</span> array</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> reduce(array,</span><br><span class="line">        (result, current) =&gt; &#123;</span><br><span class="line">            <span class="keyword">return</span> concat(result, flat(current, depth <span class="number">-1</span>))</span><br><span class="line">        &#125;,</span><br><span class="line">        []</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>PJONE</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="http://blog.captainp.cn/2019/09/16/js-array2/" title="手动实现JS数组的方法">http://blog.captainp.cn/2019/09/16/js-array2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JS/" rel="tag"># JS</a>
+          
+            <a href="/tags/array/" rel="tag"># array</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/03/vue-route/" rel="next" title="Vue router">
+                <i class="fa fa-chevron-left"></i> Vue router
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/captain.jpg" alt="PJONE">
+            
+              <p class="site-author-name" itemprop="name">PJONE</p>
+              <div class="site-description motion-element" itemprop="description">PJONE的博客</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/pjsfirst" title="GitHub &rarr; https://github.com/pjsfirst" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:903794757@qq.com" title="QQ邮箱 &rarr; mailto:903794757@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>QQ邮箱</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/pjsfirstlaw" title="CSDN &rarr; https://blog.csdn.net/pjsfirstlaw" rel="noopener" target="_blank"><i class="fa fa-fw fa-copyright"></i>CSDN</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://gitee.com/panjianone/projects" title="码云 &rarr; https://gitee.com/panjianone/projects" rel="noopener" target="_blank"><i class="fa fa-fw fa-google"></i>码云</a>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+              
+                
+              
+              
+              
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数组元素增删改"><span class="nav-text">数组元素增删改</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#shift"><span class="nav-text">.shift</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unshift"><span class="nav-text">.unshift</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#slice"><span class="nav-text">.slice</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#splice"><span class="nav-text">.splice</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组的合并、添加、逆转"><span class="nav-text">数组的合并、添加、逆转</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#concat"><span class="nav-text">.concat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#join"><span class="nav-text">.join</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reverse"><span class="nav-text">.reverse</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#迭代"><span class="nav-text">迭代</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#forEach"><span class="nav-text">.forEach</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map"><span class="nav-text">.map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#filter"><span class="nav-text">.filter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reduce"><span class="nav-text">.reduce</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询"><span class="nav-text">查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#findIndex"><span class="nav-text">.findIndex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find"><span class="nav-text">.find</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#indexOf"><span class="nav-text">.indexOf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lastIndexOf"><span class="nav-text">.lastIndexOf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#every"><span class="nav-text">.every</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#some"><span class="nav-text">.some</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#includes"><span class="nav-text">.includes</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扁平化"><span class="nav-text">扁平化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#flat"><span class="nav-text">.flat</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PJONE</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">117k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">1:47</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
