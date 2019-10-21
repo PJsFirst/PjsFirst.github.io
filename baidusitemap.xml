@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://blog.captainp.cn/2019/09/16/js-array2/</loc>
-    <lastmod>2019-09-17</lastmod>
+    <loc>http://blog.captainp.cn/2019/10/20/js-deep-copy/</loc>
+    <lastmod>2019-10-21</lastmod>
   </url>  <url>
     <loc>http://blog.captainp.cn/2019/08/16/js-array/</loc>
-    <lastmod>2019-09-11</lastmod>
+    <lastmod>2019-09-22</lastmod>
+  </url>  <url>
+    <loc>http://blog.captainp.cn/2019/09/16/js-array2/</loc>
+    <lastmod>2019-09-17</lastmod>
   </url>  <url>
     <loc>http://blog.captainp.cn/2019/09/03/vue-route/</loc>
     <lastmod>2019-09-09</lastmod>
