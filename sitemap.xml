@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.captainp.cn/2019/10/29/css-skill/</loc>
+    
+    <lastmod>2019-10-29T04:12:06.672Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.captainp.cn/2019/10/20/js-deep-copy/</loc>
     
     <lastmod>2019-10-21T04:24:23.966Z</lastmod>
