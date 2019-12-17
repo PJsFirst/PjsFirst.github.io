@@ -1,3 +1,4 @@
+http://blog.captainp.cn/2019/12/17/jq-load/
 http://blog.captainp.cn/2019/12/01/2darray/
 http://blog.captainp.cn/2019/11/04/optimize/
 http://blog.captainp.cn/2019/10/29/css-skill/
